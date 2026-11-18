@@ -1,0 +1,23 @@
+plugins {
+    id "java"
+}
+
+group = "net.mcreator.generator.forge"
+
+def pluginMetadata = new groovy.json.JsonSlurper().parse(file("src/main/resources/plugin.json"))
+version = pluginMetadata.info.version
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(25)
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = "UTF-8"
+}
+
+tasks.jar {
+    archiveFileName.set("generator-forge-1.21.1.zip")
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}

@@ -1,0 +1,2 @@
+<#assign potion = generator.map(field$potion, "potions")>
+/*@ItemStack*/(PotionContents.createItemStack(Items.${field$type}, ${potion?starts_with("Potions.")?then(potion, potion + ".getHolder().orElseThrow()")}))

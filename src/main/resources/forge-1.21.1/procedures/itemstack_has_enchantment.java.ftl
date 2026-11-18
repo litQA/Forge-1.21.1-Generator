@@ -1,0 +1,2 @@
+<#include "mcitems.ftl">
+(EnchantmentHelper.getItemEnchantmentLevel(world.registryAccess().lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(${generator.map(field$enhancement, "enchantments")}), ${mappedMCItemToItemStackCode(input$item, 1)}) != 0)

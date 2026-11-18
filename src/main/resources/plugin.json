@@ -1,0 +1,12 @@
+{
+  "id": "generator-forge-1.21.1",
+  "supportedversions": [202600344621, 202600399999],
+  "weight": 0,
+  "info": {
+    "name": "Minecraft Forge 1.21.1 Generator",
+    "version": "2026.3-1.0.1.26-beta",
+    "description": "MCreator Minecraft Forge 1.21.1 Generator",
+    "author": "LitQA",
+    "credits": "Thanks to Moegirl Deepseek for assistance. Based on the official NeoForge-Generator-MCreator project."
+  }
+}

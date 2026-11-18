@@ -1,0 +1,61 @@
+plugins {
+    id 'java'
+    id 'eclipse'
+    id 'net.minecraftforge.gradle' version '[7.0.3,8)'
+}
+
+version = '1.0'
+group = '${package}'
+base.archivesName = 'modid'
+
+java.toolchain.languageVersion = JavaLanguageVersion.of(21)
+
+minecraft {
+    mappings channel: 'official', version: '${generator.getGeneratorMinecraftVersion()}'
+
+    runs {
+        configureEach {
+            workingDir = layout.projectDirectory.dir('run')
+            systemProperty 'forge.logging.markers', 'REGISTRIES'
+            systemProperty 'forge.logging.console.level', 'debug'
+        }
+
+        register('client') {
+            def mcreatorJvmOptions = System.getenv('MCREATOR_JVM_OPTIONS')
+            if (mcreatorJvmOptions) {
+                mcreatorJvmOptions.split("\\s+").findAll { it.trim() }.each { arg ->
+                    jvmArg(arg)
+                }
+            }
+        }
+
+        register('server') {
+            args '--nogui'
+        }
+    }
+}
+
+repositories {
+    minecraft.mavenizer(it)
+    maven fg.forgeMaven
+    maven fg.minecraftLibsMaven
+    mavenCentral()
+}
+
+dependencies {
+    implementation minecraft.dependency("net.minecraftforge:forge:${generator.getGeneratorMinecraftVersion()}-${generator.getGeneratorBuildFileVersion()}")
+}
+
+if (file("src/main/resources/${modid}.mixins.json").exists()) {
+    jar {
+        manifest {
+            attributes 'MixinConfigs': "${modid}.mixins.json"
+        }
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}
+
+apply from: 'mcreator.gradle'
