@@ -33,6 +33,21 @@
 
 package ${package}.recipe.brewing;
 
+import java.util.Optional;
+
+import net.minecraft.core.Holder;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.alchemy.Potion;
+import net.minecraft.world.item.alchemy.PotionContents;
+import net.minecraft.world.item.alchemy.Potions;
+import net.minecraftforge.common.brewing.IBrewingRecipe;
+import net.minecraftforge.event.brewing.BrewingRecipeRegisterEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
+
 <#assign brewingInputPotion = generator.map(data.brewingInputStack?replace("POTION:",""), "potions")>
 <#assign brewingOutputPotion = generator.map(data.brewingReturnStack?replace("POTION:",""), "potions")>
 

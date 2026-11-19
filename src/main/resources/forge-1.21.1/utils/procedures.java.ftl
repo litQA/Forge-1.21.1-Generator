@@ -15,7 +15,7 @@
 </#macro>
 
 <#macro procedureCode object dependencies={} semicolon=true>
-    ${object.getName()}Procedure.execute(<@procedureDependenciesCode object.getDependencies(generator.getWorkspace()) dependencies/>)<#if semicolon>;</#if>
+    ${package}.procedures.${object.getName()}Procedure.execute(<@procedureDependenciesCode object.getDependencies(generator.getWorkspace()) dependencies/>)<#if semicolon>;</#if>
 </#macro>
 
 <#macro procedureCodeWithOptResult object type defaultResult dependencies={}>
@@ -38,7 +38,7 @@
         </#if>
     </#list>
 
-    ${(name)}Procedure.execute(<#list depsBuilder as dep>${dep}<#if dep?has_next>,</#if></#list>)
+    ${package}.procedures.${(name)}Procedure.execute(<#list depsBuilder as dep>${dep}<#if dep?has_next>,</#if></#list>)
 </#macro>
 
 <#macro procedureToCode name dependencies customVals={}>

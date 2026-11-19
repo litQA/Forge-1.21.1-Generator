@@ -23,7 +23,7 @@
 
 ## Fixes
 
-Fixed 18 bugs.
+Fixed 20 bugs.
 
 - Forge registry and capability replacements no longer reference NeoForge types.
 - Fluid blocks, buckets, and fluid types use Forge 1.21.1 APIs.
@@ -43,6 +43,8 @@ Fixed 18 bugs.
 - Generated workspaces enable ForgeGradle 7 source-set output merging so mod classes and resources are loaded from one mod file.
 - Custom network messages set `context.setPacketHandled(true)` after dispatch so Forge does not schedule the same payload a second time on the render thread and consume it twice.
 - The generated mod installs a guarded, data-populated `LootModifierManager` fallback when Forge 52.1.21 leaves it uninitialized in the development client; normal servers where Forge initializes the manager are unaffected.
+- Custom potion-effect procedure expressions resolve `RegistryObject` effects through `getHolder().orElseThrow()` instead of passing the registry object directly.
+- Generated procedure calls are fully qualified and block, block-entity, plant, init, and brewing templates carry the imports needed when a converted workspace does not run a Gradle sync first. The workspace base includes a Forge 52.1.21 import cache for initial code organization.
 
 ## Known Limitations
 

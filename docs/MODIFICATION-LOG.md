@@ -12,3 +12,4 @@ Build numbers are cumulative modification counts. The current value is stored in
 | 28 | Enabled ForgeGradle 7 source-set output merging so generated run configurations load the mod classes and resources from the same mod file. |
 | 29 | Initialized custom fluid-type registration from the registry key and assigned generated event subscribers to their matching Forge event bus. |
 | 30 | Fixed duplicate custom-payload dispatch by marking decoded messages handled, and added a guarded `LootModifierManager` fallback that loads global loot data when Forge's reload event does not initialize it. |
+| 31 | Fixed custom potion-effect holder conversions, fully qualified generated procedure calls, and expanded block, block-entity, plant, init, and brewing imports for converted workspaces; embedded a Forge 52.1.21 import cache in the workspace base. |

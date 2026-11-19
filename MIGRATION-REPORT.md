@@ -72,11 +72,13 @@ The baseline 2026.3 feature surface is retained in full. All mod-element generat
 - The generated workspace compiled with the ForgeGradle 7 toolchain and launched a Forge 52.1.21 client outside MCreator's integrated Gradle action. The client loaded the generated mod and reached world creation.
 - The custom channel was exercised end to end: three player-variable and saved-data packets were decoded once, with zero empty-payload or unknown-payload warnings after marking the payload handled.
 - Mob loot was exercised with a fallback loot manager after Forge failed to initialize it in the development client; a summoned cow was killed without a `LootModifierManager` crash. The fallback also loaded global loot data from the server resource manager.
+- A headless conversion probe successfully converted every Java mod-element workspace from `test-2026.2` down to `test-2019.5`; the only failures were Bedrock and datapack workspaces whose generators were intentionally unavailable in that isolated run. Converted workspaces with custom code that still calls NeoForge or legacy APIs are not compile-valid; conversion regenerates MCreator elements, not arbitrary user Java.
 - MCreator's integrated ForgeGradle sync still cannot run in this execution sandbox because the AccessTransformer child process opens its output as read-only when the sandbox reports every Java path as non-writable. The failure occurs in the ForgeGradle task, before generated-source compilation.
 
 ## Known Limitations
 
 - Custom boat variants use the vanilla oak boat type. Forge 1.21.1 has no public boat type extension point; custom boat tick procedures are applied to boats in the level.
+- Conversion updates MCreator-generated elements, not arbitrary hand-written custom Java. Workspaces containing custom code written against NeoForge, Fabric, or legacy APIs must have that code migrated separately.
 - Honey cure metadata is omitted because Forge 1.21.1 has no `EffectCure`.
 - Unbreakable tools remove the maximum damage component through a generated `components()` override.
 - Forge's critical hit event does not expose sweep disabling or critical-hit disabling. Those event parameter mappings are unavailable.
