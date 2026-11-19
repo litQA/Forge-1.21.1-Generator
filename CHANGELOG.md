@@ -23,7 +23,7 @@
 
 ## Fixes
 
-Fixed 13 bugs.
+Fixed 14 bugs.
 
 - Forge registry and capability replacements no longer reference NeoForge types.
 - Fluid blocks, buckets, and fluid types use Forge 1.21.1 APIs.
@@ -38,6 +38,7 @@ Fixed 13 bugs.
 - Global loot modifiers and biome modifiers use Forge serializer registries.
 - Generated trigger classes register on both required Forge event buses.
 - Generated client run configurations pass MCreator JVM options through the ForgeGradle 7 launcher API.
+- Generated workspaces enable ForgeGradle 7 source-set output merging so mod classes and resources are loaded from one mod file.
 
 ## Known Limitations
 
