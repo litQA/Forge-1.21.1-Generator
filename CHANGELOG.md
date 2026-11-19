@@ -23,7 +23,7 @@
 
 ## Fixes
 
-Fixed 12 bugs.
+Fixed 13 bugs.
 
 - Forge registry and capability replacements no longer reference NeoForge types.
 - Fluid blocks, buckets, and fluid types use Forge 1.21.1 APIs.
@@ -37,6 +37,7 @@ Fixed 12 bugs.
 - Sign blocks are added to the vanilla sign block entity type through a reflective field replacement.
 - Global loot modifiers and biome modifiers use Forge serializer registries.
 - Generated trigger classes register on both required Forge event buses.
+- Generated client run configurations pass MCreator JVM options through the ForgeGradle 7 launcher API.
 
 ## Known Limitations
 
