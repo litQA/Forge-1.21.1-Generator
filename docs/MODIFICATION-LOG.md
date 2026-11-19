@@ -11,3 +11,4 @@ Build numbers are cumulative modification counts. The current value is stored in
 | 27 | Switched generated client run JVM options to the ForgeGradle 7 `jvmArgs` launcher API so workspaces configure and build correctly. |
 | 28 | Enabled ForgeGradle 7 source-set output merging so generated run configurations load the mod classes and resources from the same mod file. |
 | 29 | Initialized custom fluid-type registration from the registry key and assigned generated event subscribers to their matching Forge event bus. |
+| 30 | Fixed duplicate custom-payload dispatch by marking decoded messages handled, and added a guarded `LootModifierManager` fallback that loads global loot data when Forge's reload event does not initialize it. |

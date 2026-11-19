@@ -16,10 +16,13 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.TickTask;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.common.loot.LootModifierManager;
+import net.minecraftforge.event.entity.player.PlayerEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import net.minecraftforge.common.MinecraftForge;
@@ -91,6 +94,52 @@ import ${package}.world.biomemodifier.${JavaModName}BiomeModifiers;
 	// Start of user code block mod methods
 	// End of user code block mod methods
 
+	@SubscribeEvent
+	public void onPlayerLoggedIn(PlayerEvent.PlayerLoggedInEvent event) {
+		if (event.getEntity() instanceof ServerPlayer player) {
+			ensureLootManager(player.server);
+		}
+	}
+
+	/**
+	 * Forge 52.1.21 can leave LootModifierManager uninitialized when the
+	 * AddReloadListenerEvent does not reach ForgeInternalHandler (observed in
+	 * the Gradle development client). Install and populate a fallback manager
+	 * only when Forge has not done so; normal servers are unaffected.
+	 */
+	private static void ensureLootManager(MinecraftServer server) {
+		try {
+			Class<?> handlerClass = Class.forName("net.minecraftforge.common.ForgeInternalHandler");
+			java.lang.reflect.Field instanceField = handlerClass.getDeclaredField("INSTANCE");
+			instanceField.setAccessible(true);
+			if (instanceField.get(null) != null)
+				return;
+
+			LootModifierManager manager = new LootModifierManager(server.registryAccess());
+			instanceField.set(null, manager);
+			try {
+				Class<?> listenerClass = Class.forName("net.minecraft.server.packs.resources.SimpleJsonResourceReloadListener");
+				java.lang.reflect.Method prepare = listenerClass.getDeclaredMethod("prepare",
+						net.minecraft.server.packs.resources.ResourceManager.class,
+						net.minecraft.util.profiling.ProfilerFiller.class);
+				prepare.setAccessible(true);
+				Object prepared = prepare.invoke(manager, server.getResourceManager(), server.getProfiler());
+
+				java.lang.reflect.Method apply = LootModifierManager.class.getDeclaredMethod("apply",
+						java.util.Map.class,
+						net.minecraft.server.packs.resources.ResourceManager.class,
+						net.minecraft.util.profiling.ProfilerFiller.class);
+				apply.setAccessible(true);
+				apply.invoke(manager, prepared, server.getResourceManager(), server.getProfiler());
+			} catch (Throwable loadError) {
+				LOGGER.warn("Could not load global loot modifiers into the fallback manager", loadError);
+			}
+			LOGGER.warn("Forge did not initialize LootModifierManager; installed a fallback manager");
+		} catch (Throwable t) {
+			LOGGER.warn("Could not install the LootModifierManager fallback", t);
+		}
+	}
+
 	<#-- Networking support below -->
 	private static boolean networkingRegistered = false;
 	private static final Map<ResourceLocation, NetworkMessage<?>> MESSAGES = new HashMap<>();
@@ -113,11 +162,14 @@ import ${package}.world.biomemodifier.${JavaModName}BiomeModifiers;
 
 		public void handle(CustomPayloadEvent.Context context) {
 			NetworkMessage<?> message = MESSAGES.get(id());
-			if (message == null)
+			if (message == null) {
+				context.setPacketHandled(true);
 				return;
+			}
 			RegistryAccess registryAccess = context.getSender() != null ? context.getSender().serverLevel().registryAccess() : ClientNetworkHelper.registryAccess();
 			RegistryFriendlyByteBuf buffer = new RegistryFriendlyByteBuf(Unpooled.wrappedBuffer(data()), registryAccess);
 			dispatch(message, buffer, new ForgePayloadContext(context));
+			context.setPacketHandled(true);
 		}
 
 	}
@@ -164,6 +216,10 @@ import ${package}.world.biomemodifier.${JavaModName}BiomeModifiers;
 
 	public static void sendToPlayer(ServerPlayer player, CustomPacketPayload payload) {
 		ensureNetworkInitialized();
+		if (player.connection.getConnection().getProtocol() != net.minecraft.network.ConnectionProtocol.PLAY) {
+			player.server.tell(new TickTask(player.server.getTickCount() + 1, () -> sendToPlayer(player, payload)));
+			return;
+		}
 		NETWORK.send(envelope(payload, player.serverLevel().registryAccess()), PacketDistributor.PLAYER.with(player));
 	}
 

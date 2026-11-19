@@ -67,8 +67,11 @@ The baseline 2026.3 feature surface is retained in full. All mod-element generat
 
 - The integration harness loaded the generator, created a workspace, generated every supported mod element variant, generated base resources and data pack files, organized imports, formatted Java, and resolved every code-provider request.
 - The integration harness reported success for workspace setup, texture references, base generation, resource setup, sample elements, mod-element generation, pack maker tools, procedure triggers, procedure blocks, variables, JSON triggers, command arguments, feature blocks, enchantment effects, AI task blocks, regeneration, JSON verification, import organization, and code provider.
+- The full 2026.3 `GeneratorsTest` suite completed 22 tests with only `Testing workspace build with mod elements` and `Testing server run` failing at the sandboxed ForgeGradle AccessTransformer step; all generation tests, including dimension portals, passed.
 - Generated Java was checked against the Forge 52.1.21 source tree. The remaining offline javac diagnostics are attributable to the proxy classpath lacking Forge's `ItemStack` capability patch, Forge's item client callback, and Forge's client GUI event; each call site was verified against the 52.1.21 sources.
 - The generated workspace compiled with the ForgeGradle 7 toolchain and launched a Forge 52.1.21 client outside MCreator's integrated Gradle action. The client loaded the generated mod and reached world creation.
+- The custom channel was exercised end to end: three player-variable and saved-data packets were decoded once, with zero empty-payload or unknown-payload warnings after marking the payload handled.
+- Mob loot was exercised with a fallback loot manager after Forge failed to initialize it in the development client; a summoned cow was killed without a `LootModifierManager` crash. The fallback also loaded global loot data from the server resource manager.
 - MCreator's integrated ForgeGradle sync still cannot run in this execution sandbox because the AccessTransformer child process opens its output as read-only when the sandbox reports every Java path as non-writable. The failure occurs in the ForgeGradle task, before generated-source compilation.
 
 ## Known Limitations
@@ -82,3 +85,4 @@ The baseline 2026.3 feature surface is retained in full. All mod-element generat
 - The custom biome preset bridge uses reflection over the private preset provider field. It is runtime-guarded and falls back to the original provider on failure.
 - Block entity persistent data is stored in a generator-owned SavedData map keyed by dimension and block position. It is not the NeoForge per-block-entity persistent data map.
 - MCreator's integrated ForgeGradle AccessTransformer step is blocked by the execution sandbox. Direct Gradle compilation and a client launch were validated separately in the same workspace.
+- If Forge 52.1.21 does not fire its loot reload path, the generated `mod` class installs a fallback `LootModifierManager` at player login and loads global loot data manually. A failed manual load logs a warning and leaves global loot modifiers inactive for that session instead of crashing mob loot.
