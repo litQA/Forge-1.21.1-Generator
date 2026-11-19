@@ -1,6 +1,5 @@
 <#include "procedures.java.ftl">
-@Mod.EventBusSubscriber(modid = ${JavaModName}.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT) public class ${name}Procedure {
-	static { MinecraftForge.EVENT_BUS.register(${name}Procedure.class); }
+@Mod.EventBusSubscriber(modid = ${JavaModName}.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT) public class ${name}Procedure {
 	@SubscribeEvent public static void onRightClick(PlayerInteractEvent.RightClickEmpty event) {
 		<#assign dependenciesCode>
 			<@procedureDependenciesCode dependencies, {

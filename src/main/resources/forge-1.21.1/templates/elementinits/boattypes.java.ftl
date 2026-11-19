@@ -40,9 +40,8 @@ package ${package}.init;
 <#assign boatsWithTickEvent = specialentities?filter(e -> hasProcedure(e.onTickUpdate))>
 
 <#if boatsWithTickEvent?size gt 0>
-@Mod.EventBusSubscriber(modid = ${JavaModName}.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
+@Mod.EventBusSubscriber(modid = ${JavaModName}.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 </#if>public class ${JavaModName}BoatTypes {
-	static { MinecraftForge.EVENT_BUS.register(${JavaModName}BoatTypes.class); }
 
 	<#if boatsWithTickEvent?size gt 0>
 	@SubscribeEvent public static void onBoatsTick(TickEvent.LevelTickEvent event) {
@@ -62,4 +61,4 @@ package ${package}.init;
 		}
 	}
 	</#if>
-}
+}

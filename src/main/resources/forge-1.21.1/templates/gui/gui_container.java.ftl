@@ -40,11 +40,9 @@ import ${package}.${JavaModName};
 
 <@javacompress>
 <#if hasProcedure(data.onTick) || hasProcedure(data.onOpen)>
-@Mod.EventBusSubscriber(modid = ${JavaModName}.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
+@Mod.EventBusSubscriber(modid = ${JavaModName}.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 </#if>
 public class ${name}Menu extends AbstractContainerMenu implements ${JavaModName}Menus.MenuAccessor {
-
-	static { MinecraftForge.EVENT_BUS.register(${name}Menu.class); }
 
 	public final Map<String, Object> menuState = new HashMap<>() {
 		@Override public Object put(String key, Object value) {

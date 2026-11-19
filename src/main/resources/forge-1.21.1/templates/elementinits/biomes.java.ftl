@@ -44,7 +44,7 @@ import com.mojang.datafixers.util.Pair;
 <#assign spawn_nether = biomes?filter(biome -> biome.spawnBiomeNether)>
 
 @Mod.EventBusSubscriber(modid = ${JavaModName}.MODID, bus = Mod.EventBusSubscriber.Bus.MOD) public class ${JavaModName}Biomes {
-	static { MinecraftForge.EVENT_BUS.register(${JavaModName}Biomes.class); }
+	static { MinecraftForge.EVENT_BUS.addListener(${JavaModName}Biomes::onServerAboutToStart); }
 
 	public static final ResourceLocation OVERWORLD_BIOMESOURCE_PRESET_ID = ResourceLocation.withDefaultNamespace("overworld");
 	public static final ResourceLocation NETHER_BIOMESOURCE_PRESET_ID = ResourceLocation.withDefaultNamespace("nether");
@@ -86,7 +86,7 @@ import com.mojang.datafixers.util.Pair;
 		}
 	}
 
-	@SubscribeEvent public static void onServerAboutToStart(ServerAboutToStartEvent event) {
+	public static void onServerAboutToStart(ServerAboutToStartEvent event) {
 		Registry<LevelStem> levelStemTypeRegistry = event.getServer().registryAccess().registryOrThrow(Registries.LEVEL_STEM);
 		for (LevelStem levelStem : levelStemTypeRegistry.stream().toList()) {
 			Holder<DimensionType> dimensionType = levelStem.type();

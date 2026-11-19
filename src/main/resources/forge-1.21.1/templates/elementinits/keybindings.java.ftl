@@ -94,8 +94,7 @@ package ${package}.init;
 		</#list>
 	}
 
-	@Mod.EventBusSubscriber(modid = ${JavaModName}.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT) public static class KeyEventListener {
-	static { MinecraftForge.EVENT_BUS.register(KeyEventListener.class); }
+	@Mod.EventBusSubscriber(modid = ${JavaModName}.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT) public static class KeyEventListener {
 
 		@SubscribeEvent public static void onClientTick(TickEvent.ClientTickEvent event) {
 			if (event.phase != TickEvent.Phase.END) return;

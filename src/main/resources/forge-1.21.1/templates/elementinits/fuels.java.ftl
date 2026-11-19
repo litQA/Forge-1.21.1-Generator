@@ -39,8 +39,7 @@
 
 package ${package}.init;
 
-@Mod.EventBusSubscriber(modid = ${JavaModName}.MODID, bus = Mod.EventBusSubscriber.Bus.MOD) public class ${JavaModName}Fuels {
-	static { MinecraftForge.EVENT_BUS.register(${JavaModName}Fuels.class); }
+@Mod.EventBusSubscriber(modid = ${JavaModName}.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE) public class ${JavaModName}Fuels {
 
 	@SubscribeEvent public static void furnaceFuelBurnTimeEvent(FurnaceFuelBurnTimeEvent event) {
 		<@javacompress>

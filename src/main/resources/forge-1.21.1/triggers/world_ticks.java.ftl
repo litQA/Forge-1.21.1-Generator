@@ -1,6 +1,5 @@
 <#include "procedures.java.ftl">
-@Mod.EventBusSubscriber(modid = ${JavaModName}.MODID, bus = Mod.EventBusSubscriber.Bus.MOD) public class ${name}Procedure {
-	static { MinecraftForge.EVENT_BUS.register(${name}Procedure.class); }
+@Mod.EventBusSubscriber(modid = ${JavaModName}.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE) public class ${name}Procedure {
 	@SubscribeEvent public static void onWorldTick(TickEvent.LevelTickEvent event) {
 		if (event.phase==TickEvent.Phase.END) {
 			<#assign dependenciesCode>

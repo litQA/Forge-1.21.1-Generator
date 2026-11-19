@@ -33,9 +33,8 @@
 
 package ${package}.command;
 
-@Mod.EventBusSubscriber(modid = ${JavaModName}.MODID, bus = Mod.EventBusSubscriber.Bus.MOD<#if data.type == "CLIENTSIDE">, value = Dist.CLIENT</#if>)
+@Mod.EventBusSubscriber(modid = ${JavaModName}.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE<#if data.type == "CLIENTSIDE">, value = Dist.CLIENT</#if>)
 public class ${name}Command {
-	static { MinecraftForge.EVENT_BUS.register(${name}Command.class); }
 
 	<#if data.type == "CLIENTSIDE">
 		@SubscribeEvent public static void registerCommand(RegisterClientCommandsEvent event) {

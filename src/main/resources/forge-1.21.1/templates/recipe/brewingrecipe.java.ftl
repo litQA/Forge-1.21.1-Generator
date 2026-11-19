@@ -36,8 +36,7 @@ package ${package}.recipe.brewing;
 <#assign brewingInputPotion = generator.map(data.brewingInputStack?replace("POTION:",""), "potions")>
 <#assign brewingOutputPotion = generator.map(data.brewingReturnStack?replace("POTION:",""), "potions")>
 
-@Mod.EventBusSubscriber(modid = ${JavaModName}.MODID, bus = Mod.EventBusSubscriber.Bus.MOD) public class ${name}BrewingRecipe implements IBrewingRecipe {
-	static { MinecraftForge.EVENT_BUS.register(${name}BrewingRecipe.class); }
+@Mod.EventBusSubscriber(modid = ${JavaModName}.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE) public class ${name}BrewingRecipe implements IBrewingRecipe {
 
 	@SubscribeEvent public static void init(BrewingRecipeRegisterEvent event) {
 		event.addRecipe(new ${name}BrewingRecipe());

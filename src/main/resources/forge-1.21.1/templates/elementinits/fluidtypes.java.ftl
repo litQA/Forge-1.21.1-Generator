@@ -38,7 +38,7 @@ package ${package}.init;
 
 public class ${JavaModName}FluidTypes {
 
-	public static final DeferredRegister<FluidType> REGISTRY = DeferredRegister.create(ForgeRegistries.FLUID_TYPES.get(), ${JavaModName}.MODID);
+	public static final DeferredRegister<FluidType> REGISTRY = DeferredRegister.create(ForgeRegistries.FLUID_TYPES.getKey(), ${JavaModName}.MODID);
 
 	<#list fluids as fluid>
 	public static final RegistryObject<FluidType> ${fluid.getModElement().getRegistryNameUpper()}_TYPE =

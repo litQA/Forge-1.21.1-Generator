@@ -65,9 +65,8 @@ public class ${name} {
 
 	}
 
-    @Mod.EventBusSubscriber(modid = ${JavaModName}.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
+    @Mod.EventBusSubscriber(modid = ${JavaModName}.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 	private static class ${name}ForgeBusEvents {
-	static { MinecraftForge.EVENT_BUS.register(${name}ForgeBusEvents.class); }
 
 		@SubscribeEvent
 		public static void serverLoad(ServerStartingEvent event) {

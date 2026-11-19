@@ -10,3 +10,4 @@ Build numbers are cumulative modification counts. The current value is stored in
 | 26 | Added the delivery changelog, migration report, final version metadata, and completed the Forge 1.21.1 compile-fix verification pass. |
 | 27 | Switched generated client run JVM options to the ForgeGradle 7 `jvmArgs` launcher API so workspaces configure and build correctly. |
 | 28 | Enabled ForgeGradle 7 source-set output merging so generated run configurations load the mod classes and resources from the same mod file. |
+| 29 | Initialized custom fluid-type registration from the registry key and assigned generated event subscribers to their matching Forge event bus. |

@@ -34,9 +34,8 @@ package ${package}.client;
 
 import com.mojang.math.Axis;
 
-@Mod.EventBusSubscriber(modid = ${JavaModName}.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+@Mod.EventBusSubscriber(modid = ${JavaModName}.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
 public class ${JavaModName}SkyboxRenderer {
-	static { MinecraftForge.EVENT_BUS.register(${JavaModName}SkyboxRenderer.class); }
 
 	<#list dimensions as dimension>
 		<#if dimension.enableCustomSkyboxTextures || dimension.enableCustomSunMoonTextures>
