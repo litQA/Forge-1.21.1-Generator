@@ -42,7 +42,7 @@ import ${package}.${JavaModName};
 <#if hasProcedure(data.onTick) || hasProcedure(data.onOpen)>
 @Mod.EventBusSubscriber(modid = ${JavaModName}.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 </#if>
-public class ${name}Menu extends AbstractContainerMenu implements ${JavaModName}Menus.MenuAccessor {
+public class ${name}Menu extends AbstractContainerMenu implements ${package}.init.${JavaModName}Menus.MenuAccessor {
 
 	public final Map<String, Object> menuState = new HashMap<>() {
 		@Override public Object put(String key, Object value) {
@@ -67,7 +67,7 @@ public class ${name}Menu extends AbstractContainerMenu implements ${JavaModName}
 	private BlockEntity boundBlockEntity = null;
 
 	public ${name}Menu(int id, Inventory inv, FriendlyByteBuf extraData) {
-		super(${JavaModName}Menus.${REGISTRYNAME}.get(), id);
+		super(${package}.init.${JavaModName}Menus.${REGISTRYNAME}.get(), id);
 
 		this.entity = inv.player;
 		this.world = inv.player.level();
@@ -108,7 +108,7 @@ public class ${name}Menu extends AbstractContainerMenu implements ${JavaModName}
 					boundBlockEntity = this.world.getBlockEntity(pos);
 					if (boundBlockEntity instanceof BaseContainerBlockEntity baseContainerBlockEntity) {
 						<#-- Blocks explicitly bound to this GUI bind without container size check, so misconfigured inventory size fails visibly -->
-						if (this.world.getBlockState(pos).getBlock() instanceof ${JavaModName}Menus.BoundBlock boundBlock && boundBlock.getBoundMenuClass() == ${name}Menu.class) {
+						if (this.world.getBlockState(pos).getBlock() instanceof ${package}.init.${JavaModName}Menus.BoundBlock boundBlock && boundBlock.getBoundMenuClass() == ${name}Menu.class) {
 							this.internal = new InvWrapper(baseContainerBlockEntity);
 							this.bound = true;
 						<#-- Other containers (e.g. vanilla ones or blocks bound to other GUIs) only bind if slots of this GUI fit in the container (forum/124103) -->

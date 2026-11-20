@@ -1,6 +1,6 @@
 private static int getAmountInGUISlot(Entity entity, int sltid) {
 	<#if w.hasElementsOfType("gui")>
-	if(entity instanceof Player player && player.containerMenu instanceof ${JavaModName}Menus.MenuAccessor menuAccessor) {
+	if(entity instanceof Player player && player.containerMenu instanceof ${package}.init.${JavaModName}Menus.MenuAccessor menuAccessor) {
 		ItemStack stack = menuAccessor.getSlots().get(sltid).getItem();
 		if(stack != null)
 			return stack.getCount();

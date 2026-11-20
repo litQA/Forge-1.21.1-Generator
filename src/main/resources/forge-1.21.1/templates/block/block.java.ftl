@@ -136,7 +136,7 @@ public class ${getClassName()}Block extends ${getBlockClass(data.blockBase)}
 	<#if data.hasInventory>
 		<#assign interfaces += ["EntityBlock"]>
 		<#if data.guiBoundTo?has_content>
-			<#assign interfaces += ["${JavaModName}Menus.BoundBlock"]>
+			<#assign interfaces += ["${package}.init.${JavaModName}Menus.BoundBlock"]>
 		</#if>
 	</#if>
 	<#if data.isBonemealable && !(data.blockBase?has_content && data.blockBase == "TrapDoor")>
@@ -739,7 +739,7 @@ public class ${getClassName()}Block extends ${getBlockClass(data.blockBase)}
 					return Component.literal("${data.name}");
 				}
 				@Override public AbstractContainerMenu createMenu(int id, Inventory inventory, Player player) {
-					return new ${data.guiBoundTo}Menu(id, inventory, new FriendlyByteBuf(Unpooled.buffer()).writeBlockPos(pos));
+					return new ${package}.world.inventory.${data.guiBoundTo}Menu(id, inventory, new FriendlyByteBuf(Unpooled.buffer()).writeBlockPos(pos));
 				}
 			}, pos);
 		}
@@ -780,7 +780,7 @@ public class ${getClassName()}Block extends ${getBlockClass(data.blockBase)}
 
 		<#if data.guiBoundTo?has_content>
 		@Override public Class<? extends AbstractContainerMenu> getBoundMenuClass() {
-			return ${data.guiBoundTo}Menu.class;
+			return ${package}.world.inventory.${data.guiBoundTo}Menu.class;
 		}
 		</#if>
 
@@ -826,7 +826,7 @@ public class ${getClassName()}Block extends ${getBlockClass(data.blockBase)}
 
 	<#if data.sensitiveToVibration && data.hasInventory>
 	@Override public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState blockstate, BlockEntityType<T> blockEntityType) {
-		if (!level.isClientSide && blockEntityType == ${JavaModName}BlockEntities.${REGISTRYNAME}.get()) {
+		if (!level.isClientSide && blockEntityType == ${package}.init.${JavaModName}BlockEntities.${REGISTRYNAME}.get()) {
 			return (_level, pos, state, blockEntity) -> {
 				if (blockEntity instanceof ${name}BlockEntity be)
 					VibrationSystem.Ticker.tick(_level, be.getVibrationData(), be.getVibrationUser());
@@ -938,3 +938,5 @@ public class ${getClassName()}Block extends ${getBlockClass(data.blockBase)}
 	<#else><#return blockBase + "Block">
 	</#if>
 </#function>
+
+

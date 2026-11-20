@@ -125,7 +125,7 @@ public class ${name}BlockEntity extends RandomizableContainerBlockEntity impleme
 	</#if>
 
 	public ${name}BlockEntity(BlockPos position, BlockState state) {
-		super(${JavaModName}BlockEntities.${REGISTRYNAME}.get(), position, state);
+		super(${package}.init.${JavaModName}BlockEntities.${REGISTRYNAME}.get(), position, state);
 	}
 
 	<#if data.renderType() == 4>
@@ -158,7 +158,7 @@ public class ${name}BlockEntity extends RandomizableContainerBlockEntity impleme
 		<#if data.sensitiveToVibration>
 		if (compound.contains("listener", 10)) {
 			VibrationSystem.Data.CODEC.parse(lookupProvider.createSerializationContext(NbtOps.INSTANCE), compound.getCompound("listener"))
-					.resultOrPartial(e -> ${JavaModName}.LOGGER.error("Failed to parse vibration listener for ${data.name}: '{}'", e))
+					.resultOrPartial(e -> ${package}.${JavaModName}.LOGGER.error("Failed to parse vibration listener for ${data.name}: '{}'", e))
 					.ifPresent(data -> this.vibrationData = data);
 		}
 		</#if>
@@ -181,7 +181,7 @@ public class ${name}BlockEntity extends RandomizableContainerBlockEntity impleme
 
 		<#if data.sensitiveToVibration>
 		VibrationSystem.Data.CODEC.encodeStart(lookupProvider.createSerializationContext(NbtOps.INSTANCE), this.vibrationData)
-				.resultOrPartial(e -> ${JavaModName}.LOGGER.error("Failed to encode vibration listener for ${data.name}: '{}'", e))
+				.resultOrPartial(e -> ${package}.${JavaModName}.LOGGER.error("Failed to encode vibration listener for ${data.name}: '{}'", e))
 				.ifPresent(listener -> compound.put("listener", listener));
 		</#if>
 	}
@@ -219,7 +219,7 @@ public class ${name}BlockEntity extends RandomizableContainerBlockEntity impleme
 		<#if !data.guiBoundTo?has_content>
 		return ChestMenu.threeRows(id, inventory);
 		<#else>
-		return new ${data.guiBoundTo}Menu(id, inventory, new FriendlyByteBuf(Unpooled.buffer()).writeBlockPos(this.worldPosition));
+		return new ${package}.world.inventory.${data.guiBoundTo}Menu(id, inventory, new FriendlyByteBuf(Unpooled.buffer()).writeBlockPos(this.worldPosition));
 		</#if>
 	}
 

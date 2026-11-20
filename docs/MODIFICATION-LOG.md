@@ -16,3 +16,4 @@ Build numbers are cumulative modification counts. The current value is stored in
 | 32 | Fixed generated armor client initialization to use the armor slot instead of registry-object identity during item construction, and materialized the custom armor material holder before item registration. |
 | 33 | Rebased custom armor-model parts onto the humanoid head origin so Java armor models render at the helmet position instead of the entity feet. |
 | 34 | Added local block/blockentity imports for mod, init, and inventory classes and qualified GUI slider payload types so converted GUI workspaces compile. |
+| 35 | Fully qualified generated GUI/menu, block-entity, logger, and bound-menu references so import formatting cannot strip required local symbols. |

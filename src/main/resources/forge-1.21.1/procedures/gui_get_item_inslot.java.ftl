@@ -1,5 +1,5 @@
 <#if w.hasElementsOfType("gui")>
-/*@ItemStack*/(${input$entity} instanceof Player _plrSlotItem && _plrSlotItem.containerMenu instanceof ${JavaModName}Menus.MenuAccessor _menu${cbi} ?
+/*@ItemStack*/(${input$entity} instanceof Player _plrSlotItem && _plrSlotItem.containerMenu instanceof ${package}.init.${JavaModName}Menus.MenuAccessor _menu${cbi} ?
 	_menu${cbi}.getSlots().get(${opt.toInt(input$slotid)}).getItem() : ItemStack.EMPTY)
 <#else>
 /*@ItemStack*/ItemStack.EMPTY

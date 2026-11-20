@@ -48,7 +48,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 		event.enqueueWork(() -> {
 			<#list guis as gui>
 				<#if gui.getComponentsOfType("EntityModel")?has_content><#assign hasEntityModels = true></#if>
-				MenuScreens.register(${JavaModName}Menus.${gui.getModElement().getRegistryNameUpper()}.get(), ${gui.getModElement().getName()}Screen::new);
+				MenuScreens.register(${package}.init.${JavaModName}Menus.${gui.getModElement().getRegistryNameUpper()}.get(), ${gui.getModElement().getName()}Screen::new);
 			</#list>
 		});
 	}

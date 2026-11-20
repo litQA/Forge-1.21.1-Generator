@@ -75,7 +75,7 @@ import ${package}.world.biomemodifier.${JavaModName}BiomeModifiers;
 		<#if types.features?filter(e -> e.getModElement().getMetadata("has_nbt_structure")??)?size != 0>StructureFeature.REGISTRY.register(modEventBus);</#if>
 		<#if types.potions?has_content>${JavaModName}Potions.REGISTRY.register(modEventBus);</#if>
 		<#if types.potioneffects?has_content>${JavaModName}MobEffects.REGISTRY.register(modEventBus);</#if>
-		<#if types.guis?has_content>${JavaModName}Menus.REGISTRY.register(modEventBus);</#if>
+		<#if types.guis?has_content>${package}.init.${JavaModName}Menus.REGISTRY.register(modEventBus);</#if>
 		<#if types.particles?has_content>${JavaModName}ParticleTypes.REGISTRY.register(modEventBus);</#if>
 		<#if types.villagerprofessions?has_content>${JavaModName}VillagerProfessions.PROFESSIONS.register(modEventBus);</#if>
 		<#if types.fluids?has_content>
@@ -272,3 +272,4 @@ import ${package}.world.biomemodifier.${JavaModName}BiomeModifiers;
 
 }
 <#-- @formatter:on -->
+
