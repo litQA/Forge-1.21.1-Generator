@@ -47,38 +47,37 @@ import net.minecraft.client.model.Model;
 @Mod.EventBusSubscriber(modid = ${JavaModName}.MODID, bus = Mod.EventBusSubscriber.Bus.MOD) public abstract class ${name}Item extends ArmorItem {
 	static { MinecraftForge.EVENT_BUS.register(${name}Item.class); }
 
-	public static Holder<ArmorMaterial> ARMOR_MATERIAL = null;
+	private static final ArmorMaterial ARMOR_MATERIAL_VALUE = new ArmorMaterial(
+		net.minecraft.Util.make(new EnumMap<>(ArmorItem.Type.class), map -> {
+			map.put(ArmorItem.Type.BOOTS, ${data.damageValueBoots});
+			map.put(ArmorItem.Type.LEGGINGS, ${data.damageValueLeggings});
+			map.put(ArmorItem.Type.CHESTPLATE, ${data.damageValueBody});
+			map.put(ArmorItem.Type.HELMET, ${data.damageValueHelmet});
+			map.put(ArmorItem.Type.BODY, ${data.damageValueBody});
+		}),
+		${data.enchantability},
+		<#if data.equipSound?has_content && data.equipSound.getUnmappedValue()?has_content>
+		net.minecraft.core.Holder.direct(net.minecraft.sounds.SoundEvent.createVariableRangeEvent(ResourceLocation.parse("${data.equipSound}"))),
+		<#else>
+		net.minecraft.sounds.SoundEvents.ARMOR_EQUIP_LEATHER,
+		</#if>
+		() -> ${mappedMCItemsToIngredient(data.repairItems)},
+		List.of(new ArmorMaterial.Layer(ResourceLocation.parse("${modid}:${data.armorTextureFile}"))),
+		${data.toughness}f,
+		${data.knockbackResistance}f
+	);
+
+	public static final Holder<ArmorMaterial> ARMOR_MATERIAL = BuiltInRegistries.ARMOR_MATERIAL.wrapAsHolder(ARMOR_MATERIAL_VALUE);
 
 	@SubscribeEvent public static void registerArmorMaterial(RegisterEvent event) {
-		event.register(Registries.ARMOR_MATERIAL, registerHelper -> {
-			ArmorMaterial armorMaterial = new ArmorMaterial(
-				net.minecraft.Util.make(new EnumMap<>(ArmorItem.Type.class), map -> {
-					map.put(ArmorItem.Type.BOOTS, ${data.damageValueBoots});
-					map.put(ArmorItem.Type.LEGGINGS, ${data.damageValueLeggings});
-					map.put(ArmorItem.Type.CHESTPLATE, ${data.damageValueBody});
-					map.put(ArmorItem.Type.HELMET, ${data.damageValueHelmet});
-					map.put(ArmorItem.Type.BODY, ${data.damageValueBody});
-				}),
-				${data.enchantability},
-				<#if data.equipSound?has_content && data.equipSound.getUnmappedValue()?has_content>
-				ForgeRegistries.SOUND_EVENTS.getHolder(ResourceLocation.parse("${data.equipSound}")).orElseThrow(),
-				<#else>
-				ForgeRegistries.SOUND_EVENTS.getHolder(SoundEvents.EMPTY).orElseThrow(),
-				</#if>
-				() -> ${mappedMCItemsToIngredient(data.repairItems)},
-				List.of(new ArmorMaterial.Layer(ResourceLocation.parse("${modid}:${data.armorTextureFile}"))),
-				${data.toughness}f,
-				${data.knockbackResistance}f
-			);
-			registerHelper.register(ResourceLocation.parse("${modid}:${registryname}"), armorMaterial);
-			ARMOR_MATERIAL = BuiltInRegistries.ARMOR_MATERIAL.wrapAsHolder(armorMaterial);
-		});
+		event.register(Registries.ARMOR_MATERIAL,
+				registerHelper -> registerHelper.register(ResourceLocation.parse("${modid}:${registryname}"), ARMOR_MATERIAL_VALUE));
 	}
 
 	<#if helmetCustomModel || bodyCustomModel || leggingsCustomModel || bootsCustomModel>
 	@Override public void initializeClient(Consumer<IClientItemExtensions> consumer) {
 		<#if helmetCustomModel>
-		if (this == ${JavaModName}Items.${REGISTRYNAME}_HELMET.get()) {
+		if (this.getType() == ArmorItem.Type.HELMET) {
 		consumer.accept(new IClientItemExtensions() {
 			private HumanoidModel armorModel = null;
 			@Override @OnlyIn(Dist.CLIENT) public HumanoidModel getHumanoidArmorModel(LivingEntity living, ItemStack stack, EquipmentSlot slot, HumanoidModel defaultModel) {
@@ -118,7 +117,7 @@ import net.minecraft.client.model.Model;
 		</#if>
 
 		<#if bodyCustomModel>
-		if (this == ${JavaModName}Items.${REGISTRYNAME}_CHESTPLATE.get()) {
+		if (this.getType() == ArmorItem.Type.CHESTPLATE) {
 		consumer.accept(new IClientItemExtensions() {
 			private HumanoidModel armorModel = null;
 			@Override @OnlyIn(Dist.CLIENT) public HumanoidModel getHumanoidArmorModel(LivingEntity living, ItemStack stack, EquipmentSlot slot, HumanoidModel defaultModel) {
@@ -159,7 +158,7 @@ import net.minecraft.client.model.Model;
 		</#if>
 
 		<#if leggingsCustomModel>
-		if (this == ${JavaModName}Items.${REGISTRYNAME}_LEGGINGS.get()) {
+		if (this.getType() == ArmorItem.Type.LEGGINGS) {
 		consumer.accept(new IClientItemExtensions() {
 			private HumanoidModel armorModel = null;
 			@Override @OnlyIn(Dist.CLIENT) public HumanoidModel getHumanoidArmorModel(LivingEntity living, ItemStack stack, EquipmentSlot slot, HumanoidModel defaultModel) {
@@ -200,7 +199,7 @@ import net.minecraft.client.model.Model;
 		</#if>
 
 		<#if bootsCustomModel>
-		if (this == ${JavaModName}Items.${REGISTRYNAME}_BOOTS.get()) {
+		if (this.getType() == ArmorItem.Type.BOOTS) {
 		consumer.accept(new IClientItemExtensions() {
 			private HumanoidModel armorModel = null;
 			@Override @OnlyIn(Dist.CLIENT) public HumanoidModel getHumanoidArmorModel(LivingEntity living, ItemStack stack, EquipmentSlot slot, HumanoidModel defaultModel) {
