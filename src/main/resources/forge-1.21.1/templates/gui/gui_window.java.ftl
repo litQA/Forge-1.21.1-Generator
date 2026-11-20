@@ -353,8 +353,6 @@ public class ${name}Screen extends AbstractContainerScreen<${name}Menu> implemen
 					}
 				};
 			this.addRenderableWidget(${component.getName()});
-			if (!menuStateUpdateActive)
-				menu.sendMenuStateUpdate(entity, 2, "${component.getName()}", ${component.getName()}.getValue(), false);
 
 			<#assign slid +=1>
 		</#list>

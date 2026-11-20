@@ -107,6 +107,7 @@ import net.minecraft.client.model.Model;
 					}
 					</#if>;
 					armorModel.head.setPos(defaultModel.head.x, defaultModel.head.y, defaultModel.head.z);
+					armorModel.head.xRot = defaultModel.head.xRot; armorModel.head.yRot = defaultModel.head.yRot; armorModel.head.zRot = defaultModel.head.zRot;
 				}
 				armorModel.crouching = living.isShiftKeyDown();
 				armorModel.riding = defaultModel.riding;
@@ -149,8 +150,11 @@ import net.minecraft.client.model.Model;
 					}
 					</#if>;
 					armorModel.body.setPos(defaultModel.body.x, defaultModel.body.y, defaultModel.body.z);
+					armorModel.body.xRot = defaultModel.body.xRot; armorModel.body.yRot = defaultModel.body.yRot; armorModel.body.zRot = defaultModel.body.zRot;
 					armorModel.rightArm.setPos(defaultModel.rightArm.x, defaultModel.rightArm.y, defaultModel.rightArm.z);
+					armorModel.rightArm.xRot = defaultModel.rightArm.xRot; armorModel.rightArm.yRot = defaultModel.rightArm.yRot; armorModel.rightArm.zRot = defaultModel.rightArm.zRot;
 					armorModel.leftArm.setPos(defaultModel.leftArm.x, defaultModel.leftArm.y, defaultModel.leftArm.z);
+					armorModel.leftArm.xRot = defaultModel.leftArm.xRot; armorModel.leftArm.yRot = defaultModel.leftArm.yRot; armorModel.leftArm.zRot = defaultModel.leftArm.zRot;
 				}
 				armorModel.crouching = living.isShiftKeyDown();
 				armorModel.riding = defaultModel.riding;
@@ -193,7 +197,9 @@ import net.minecraft.client.model.Model;
 					}
 					</#if>;
 					armorModel.leftLeg.setPos(defaultModel.leftLeg.x, defaultModel.leftLeg.y, defaultModel.leftLeg.z);
+					armorModel.leftLeg.xRot = defaultModel.leftLeg.xRot; armorModel.leftLeg.yRot = defaultModel.leftLeg.yRot; armorModel.leftLeg.zRot = defaultModel.leftLeg.zRot;
 					armorModel.rightLeg.setPos(defaultModel.rightLeg.x, defaultModel.rightLeg.y, defaultModel.rightLeg.z);
+					armorModel.rightLeg.xRot = defaultModel.rightLeg.xRot; armorModel.rightLeg.yRot = defaultModel.rightLeg.yRot; armorModel.rightLeg.zRot = defaultModel.rightLeg.zRot;
 				}
 				armorModel.crouching = living.isShiftKeyDown();
 				armorModel.riding = defaultModel.riding;
@@ -236,7 +242,9 @@ import net.minecraft.client.model.Model;
 					}
 					</#if>;
 					armorModel.leftLeg.setPos(defaultModel.leftLeg.x, defaultModel.leftLeg.y, defaultModel.leftLeg.z);
+					armorModel.leftLeg.xRot = defaultModel.leftLeg.xRot; armorModel.leftLeg.yRot = defaultModel.leftLeg.yRot; armorModel.leftLeg.zRot = defaultModel.leftLeg.zRot;
 					armorModel.rightLeg.setPos(defaultModel.rightLeg.x, defaultModel.rightLeg.y, defaultModel.rightLeg.z);
+					armorModel.rightLeg.xRot = defaultModel.rightLeg.xRot; armorModel.rightLeg.yRot = defaultModel.rightLeg.yRot; armorModel.rightLeg.zRot = defaultModel.rightLeg.zRot;
 				}
 				armorModel.crouching = living.isShiftKeyDown();
 				armorModel.riding = defaultModel.riding;
@@ -394,4 +402,6 @@ new Item.Properties()
 )
 </#if>
 </#macro>
+
+
 

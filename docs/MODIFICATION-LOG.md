@@ -19,3 +19,4 @@ Build numbers are cumulative modification counts. The current value is stored in
 | 35 | Fully qualified generated GUI/menu, block-entity, logger, and bound-menu references so import formatting cannot strip required local symbols. |
 | 36 | Fully qualified generated screen, init, item, block, effect, and mod-root references across GUI/block templates to make regenerated large workspaces import-format independent. |
 | 37 | Fixed GUI slider feedback by suppressing network sends while applying menu-state updates, and removed the workspacebase prebuilt Gradle cache so workspace setup precedes Java model/compile work. |
+| 38 | Removed the GUI-open slider state echo that reset values to zero and copied player head/limb pose rotations onto custom armor models. |

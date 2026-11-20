@@ -23,7 +23,7 @@
 
 ## Fixes
 
-Fixed 28 bugs.
+Fixed 29 bugs.
 
 - Forge registry and capability replacements no longer reference NeoForge types.
 - Fluid blocks, buckets, and fluid types use Forge 1.21.1 APIs.
