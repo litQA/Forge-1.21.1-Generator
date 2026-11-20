@@ -38,9 +38,9 @@
 package ${package}.init;
 
 <#assign effects_that_expire = potioneffects?filter(effect -> hasProcedure(effect.onExpired))>
-<#if effects_that_expire?size != 0>@Mod.EventBusSubscriber(modid = ${JavaModName}.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE) </#if>public class ${JavaModName}MobEffects {
+<#if effects_that_expire?size != 0>@Mod.EventBusSubscriber(modid = ${package}.${JavaModName}.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE) </#if>public class ${JavaModName}MobEffects {
 
-	public static final DeferredRegister<MobEffect> REGISTRY = DeferredRegister.create(ForgeRegistries.MOB_EFFECTS, ${JavaModName}.MODID);
+	public static final DeferredRegister<MobEffect> REGISTRY = DeferredRegister.create(ForgeRegistries.MOB_EFFECTS, ${package}.${JavaModName}.MODID);
 
 	<#list potioneffects as effect>
 	public static final RegistryObject<MobEffect> ${effect.getModElement().getRegistryNameUpper()} =

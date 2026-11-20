@@ -34,7 +34,7 @@ package ${package}.client;
 
 import com.mojang.math.Axis;
 
-@Mod.EventBusSubscriber(modid = ${JavaModName}.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
+@Mod.EventBusSubscriber(modid = ${package}.${JavaModName}.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
 public class ${JavaModName}SkyboxRenderer {
 
 	<#list dimensions as dimension>

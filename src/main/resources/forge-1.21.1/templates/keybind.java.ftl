@@ -35,10 +35,10 @@ package ${package}.network;
 
 import ${package}.${JavaModName};
 
-@Mod.EventBusSubscriber(modid = ${JavaModName}.MODID, bus = Mod.EventBusSubscriber.Bus.MOD) public record ${name}Message(int eventType, int pressedms) implements CustomPacketPayload {
+@Mod.EventBusSubscriber(modid = ${package}.${JavaModName}.MODID, bus = Mod.EventBusSubscriber.Bus.MOD) public record ${name}Message(int eventType, int pressedms) implements CustomPacketPayload {
 	static { MinecraftForge.EVENT_BUS.register(${name}Message.class); }
 
-	public static final Type<${name}Message> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(${JavaModName}.MODID, "key_${registryname}"));
+	public static final Type<${name}Message> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(${package}.${JavaModName}.MODID, "key_${registryname}"));
 
 	public static final StreamCodec<RegistryFriendlyByteBuf, ${name}Message> STREAM_CODEC = StreamCodec.of(
 			(RegistryFriendlyByteBuf buffer, ${name}Message message) -> {
@@ -91,7 +91,7 @@ import ${package}.${JavaModName};
 	</#if>
 
 	@SubscribeEvent public static void registerMessage(FMLCommonSetupEvent event) {
-		${JavaModName}.addNetworkMessage(${name}Message.TYPE, ${name}Message.STREAM_CODEC, ${name}Message::handleData);
+		${package}.${JavaModName}.addNetworkMessage(${name}Message.TYPE, ${name}Message.STREAM_CODEC, ${name}Message::handleData);
 	}
 
 }

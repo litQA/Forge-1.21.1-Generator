@@ -37,13 +37,13 @@
 package ${package}.init;
 
 public class ${JavaModName}BlockEntities {
-	static { MinecraftForge.EVENT_BUS.register(${JavaModName}BlockEntities.class); }
+	static { MinecraftForge.EVENT_BUS.register(${package}.init.${JavaModName}BlockEntities.class); }
 
-	public static final DeferredRegister<BlockEntityType<?>> REGISTRY = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, ${JavaModName}.MODID);
+	public static final DeferredRegister<BlockEntityType<?>> REGISTRY = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, ${package}.${JavaModName}.MODID);
 
 	<#list blockentities as blockentity>
 	public static final RegistryObject<BlockEntityType<${blockentity.getModElement().getName()}BlockEntity>> ${blockentity.getModElement().getRegistryNameUpper()} =
-		register("${blockentity.getModElement().getRegistryName()}", ${JavaModName}Blocks.${blockentity.getModElement().getRegistryNameUpper()},
+		register("${blockentity.getModElement().getRegistryName()}", ${package}.init.${JavaModName}Blocks.${blockentity.getModElement().getRegistryNameUpper()},
 			${blockentity.getModElement().getName()}BlockEntity::new);
 	</#list>
 

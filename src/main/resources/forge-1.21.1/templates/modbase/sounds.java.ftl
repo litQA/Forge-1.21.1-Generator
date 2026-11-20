@@ -38,7 +38,7 @@ package ${package}.init;
 
 public class ${JavaModName}Sounds {
 
-	public static final DeferredRegister<SoundEvent> REGISTRY = DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, ${JavaModName}.MODID);
+	public static final DeferredRegister<SoundEvent> REGISTRY = DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, ${package}.${JavaModName}.MODID);
 
 	<#list sounds as sound>
 	public static final RegistryObject<SoundEvent> ${sound.getJavaName()} =

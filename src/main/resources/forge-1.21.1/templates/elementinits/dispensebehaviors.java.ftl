@@ -42,7 +42,7 @@ package ${package}.init;
 <#assign itemextensions = dispensebehaviors?filter(e -> e.getModElement().getTypeString() == "itemextension")>
 <#assign specialentities = dispensebehaviors?filter(e -> e.getModElement().getTypeString() == "specialentity")>
 <@javacompress>
-@Mod.EventBusSubscriber(modid = ${JavaModName}.MODID, bus = Mod.EventBusSubscriber.Bus.MOD) public class ${JavaModName}DispenseBehaviors {
+@Mod.EventBusSubscriber(modid = ${package}.${JavaModName}.MODID, bus = Mod.EventBusSubscriber.Bus.MOD) public class ${JavaModName}DispenseBehaviors {
 	static { MinecraftForge.EVENT_BUS.register(${JavaModName}DispenseBehaviors.class); }
 
 	@SubscribeEvent public static void init(FMLCommonSetupEvent event) {
@@ -117,7 +117,7 @@ package ${package}.init;
 			);
 			</#list>
 			<#list specialentities as entity>
-			DispenserBlock.registerBehavior(${JavaModName}Items.${entity.getModElement().getRegistryNameUpper()}.get(),
+			DispenserBlock.registerBehavior(${package}.init.${JavaModName}Items.${entity.getModElement().getRegistryNameUpper()}.get(),
 					new BoatDispenseItemBehavior(Boat.Type.OAK
 					<#if entity.isBoatChestVariant()>, true</#if>));
 			</#list>

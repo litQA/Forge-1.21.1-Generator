@@ -34,7 +34,7 @@
 package ${package}.fluid.types;
 
 <@javacompress>
-@Mod.EventBusSubscriber(modid = ${JavaModName}.MODID, bus = Mod.EventBusSubscriber.Bus.MOD) public class ${name}FluidType extends FluidType {
+@Mod.EventBusSubscriber(modid = ${package}.${JavaModName}.MODID, bus = Mod.EventBusSubscriber.Bus.MOD) public class ${name}FluidType extends FluidType {
 	static { MinecraftForge.EVENT_BUS.register(${name}FluidType.class); }
 	public ${name}FluidType() {
 		super(FluidType.Properties.create()

@@ -11,7 +11,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 
-@Mod.EventBusSubscriber(modid = ${JavaModName}.MODID, bus = Mod.EventBusSubscriber.Bus.MOD) public class ${JavaModName}DungeonMobs {
+@Mod.EventBusSubscriber(modid = ${package}.${JavaModName}.MODID, bus = Mod.EventBusSubscriber.Bus.MOD) public class ${JavaModName}DungeonMobs {
 	static { net.minecraftforge.common.MinecraftForge.EVENT_BUS.register(${JavaModName}DungeonMobs.class); }
 
 	@SubscribeEvent public static void registerDungeonMobs(FMLCommonSetupEvent event) {
@@ -24,3 +24,4 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 		});
 	}
 }
+

@@ -47,7 +47,7 @@ package ${package}.client.renderer.item;
 	public ${name}ItemRenderer(BlockEntityRenderDispatcher blockEntityRenderDispatcher, EntityModelSet entityModelSet) {
 		super(blockEntityRenderDispatcher, entityModelSet);
 		this.entityModelSet = entityModelSet;
-		this.transformSource = new ItemStack(${JavaModName}Items.${REGISTRYNAME}.get());
+		this.transformSource = new ItemStack(${package}.init.${JavaModName}Items.${REGISTRYNAME}.get());
 
 		<#if data.hasCustomJAVAModel()>
 			<#if data.animations?has_content>

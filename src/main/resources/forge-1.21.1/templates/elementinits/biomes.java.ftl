@@ -43,7 +43,7 @@ import com.mojang.datafixers.util.Pair;
 <#assign spawn_overworld_caves = biomes?filter(biome -> biome.spawnInCaves)>
 <#assign spawn_nether = biomes?filter(biome -> biome.spawnBiomeNether)>
 
-@Mod.EventBusSubscriber(modid = ${JavaModName}.MODID, bus = Mod.EventBusSubscriber.Bus.MOD) public class ${JavaModName}Biomes {
+@Mod.EventBusSubscriber(modid = ${package}.${JavaModName}.MODID, bus = Mod.EventBusSubscriber.Bus.MOD) public class ${JavaModName}Biomes {
 	static { MinecraftForge.EVENT_BUS.addListener(${JavaModName}Biomes::onServerAboutToStart); }
 
 	public static final ResourceLocation OVERWORLD_BIOMESOURCE_PRESET_ID = ResourceLocation.withDefaultNamespace("overworld");
@@ -95,7 +95,7 @@ import com.mojang.datafixers.util.Pair;
 					if ((Object) noiseGenerator.generatorSettings().value() instanceof ${JavaModName}NoiseGeneratorSettings settings) {
 						settings.set${modid}DimensionTypeReference(dimensionType);
 					} else {
-						${JavaModName}.LOGGER.error("NoiseGeneratorSettings mixin of ${modid} was not applied, custom biomes may not generate properly");
+						${package}.${JavaModName}.LOGGER.error("NoiseGeneratorSettings mixin of ${modid} was not applied, custom biomes may not generate properly");
 					}
 				}
 			}

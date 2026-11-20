@@ -37,12 +37,12 @@ package ${package}.world.dimension;
 <@javacompress>
 
 <#if hasProcedure(data.onPlayerLeavesDimension) || hasProcedure(data.onPlayerEntersDimension)>
-@Mod.EventBusSubscriber(modid = ${JavaModName}.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
+@Mod.EventBusSubscriber(modid = ${package}.${JavaModName}.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 </#if>
 public class ${name}Dimension {
 
 	<#if data.useCustomEffects>
-	@Mod.EventBusSubscriber(modid = ${JavaModName}.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT) public static class ${name}SpecialEffectsHandler {
+	@Mod.EventBusSubscriber(modid = ${package}.${JavaModName}.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT) public static class ${name}SpecialEffectsHandler {
 
 		@SubscribeEvent public static void registerDimensionSpecialEffects(RegisterDimensionSpecialEffectsEvent event) {
 			DimensionSpecialEffects customEffect = new DimensionSpecialEffects(
@@ -97,3 +97,4 @@ public class ${name}Dimension {
 
 }
 </@javacompress>
+

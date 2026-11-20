@@ -1,5 +1,5 @@
 <#include "procedures.java.ftl">
-@Mod.EventBusSubscriber(modid = ${JavaModName}.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE) public class ${name}Procedure {
+@Mod.EventBusSubscriber(modid = ${package}.${JavaModName}.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE) public class ${name}Procedure {
 	@SubscribeEvent public static void onSaplingGrow(SaplingGrowTreeEvent event) {
 		<#assign dependenciesCode>
 			<@procedureDependenciesCode dependencies, {

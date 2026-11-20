@@ -37,7 +37,7 @@ package ${package}.item;
 
 <@javacompress>
 <#if (data.usageCount == 0) && (data.toolType == "Pickaxe" || data.toolType == "Axe" || data.toolType == "Sword" || data.toolType == "Spade" || data.toolType == "Hoe" || data.toolType == "MultiTool")>
-@Mod.EventBusSubscriber(modid = ${JavaModName}.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
+@Mod.EventBusSubscriber(modid = ${package}.${JavaModName}.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 </#if>
 <#if data.toolType == "Pickaxe" || data.toolType == "Axe" || data.toolType == "Sword" || data.toolType == "Spade"
 		|| data.toolType == "Hoe" || data.toolType == "Shears" || data.toolType == "Shield" || data.toolType == "MultiTool">
@@ -305,7 +305,7 @@ public class ${name}Item extends FishingRodItem {
 	</#if>
 	<#list data.attributeModifiers as modifier>
 	.add(<#if modifier.attribute?starts_with("Attributes.")>${modifier.attribute}<#else>${modifier.attribute}.getHolder().orElseThrow()</#if>, new AttributeModifier(
-			ResourceLocation.fromNamespaceAndPath(${JavaModName}.MODID, "${registryname}_${modifier?index}"),
+			ResourceLocation.fromNamespaceAndPath(${package}.${JavaModName}.MODID, "${registryname}_${modifier?index}"),
 			${modifier.amount}, AttributeModifier.Operation.${modifier.operation}),
 			<#if modifier.equipmentSlot.getUnmappedValue() == "default">EquipmentSlotGroup.MAINHAND<#else>${modifier.equipmentSlot}</#if>)
 	</#list>

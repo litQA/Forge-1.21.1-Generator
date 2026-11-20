@@ -40,12 +40,12 @@ package ${package}.init;
 <#assign entitiesWithInventory = types.livingentities?filter(e -> e.guiBoundTo?has_content)>
 
 <#if hasLivingEntities || entitiesWithInventory?size != 0>
-@Mod.EventBusSubscriber(modid = ${JavaModName}.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
+@Mod.EventBusSubscriber(modid = ${package}.${JavaModName}.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 </#if>
 public class ${JavaModName}Entities {
 	static { MinecraftForge.EVENT_BUS.register(${JavaModName}Entities.class); }
 
-	public static final DeferredRegister<EntityType<?>> REGISTRY = DeferredRegister.create(ForgeRegistries.ENTITY_TYPES, ${JavaModName}.MODID);
+	public static final DeferredRegister<EntityType<?>> REGISTRY = DeferredRegister.create(ForgeRegistries.ENTITY_TYPES, ${package}.${JavaModName}.MODID);
 
 	<#list entities as entity>
 		<#if entity.getModElement().getTypeString() == "projectile">

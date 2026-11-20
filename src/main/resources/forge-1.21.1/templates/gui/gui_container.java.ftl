@@ -36,11 +36,15 @@
 
 package ${package}.world.inventory;
 
+import ${package}.init.${JavaModName}Blocks;
+import ${package}.init.${JavaModName}Items;
+import ${package}.init.${JavaModName}Menus;
+
 import ${package}.${JavaModName};
 
 <@javacompress>
 <#if hasProcedure(data.onTick) || hasProcedure(data.onOpen)>
-@Mod.EventBusSubscriber(modid = ${JavaModName}.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
+@Mod.EventBusSubscriber(modid = ${package}.${JavaModName}.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 </#if>
 public class ${name}Menu extends AbstractContainerMenu implements ${package}.init.${JavaModName}Menus.MenuAccessor {
 
@@ -346,7 +350,7 @@ public class ${name}Menu extends AbstractContainerMenu implements ${package}.ini
 		<#if data.hasSlotEvents()>
 			private void slotChanged(int slotid, int ctype, int meta) {
 				if(this.world != null && this.world.isClientSide()) {
-					${JavaModName}.sendToServer(new ${name}SlotMessage(slotid, x, y, z, ctype, meta));
+					${package}.${JavaModName}.sendToServer(new ${name}SlotMessage(slotid, x, y, z, ctype, meta));
 					${name}SlotMessage.handleSlotAction(entity, slotid, ctype, meta, x, y, z);
 				}
 			}
@@ -402,3 +406,4 @@ public class ${name}Menu extends AbstractContainerMenu implements ${package}.ini
 }
 </@javacompress>
 <#-- @formatter:on -->
+

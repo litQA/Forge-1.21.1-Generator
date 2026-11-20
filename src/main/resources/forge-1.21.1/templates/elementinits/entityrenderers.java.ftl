@@ -36,7 +36,7 @@
 
 package ${package}.init;
 
-@Mod.EventBusSubscriber(modid = ${JavaModName}.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT) public class ${JavaModName}EntityRenderers {
+@Mod.EventBusSubscriber(modid = ${package}.${JavaModName}.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT) public class ${JavaModName}EntityRenderers {
 	static { MinecraftForge.EVENT_BUS.register(${JavaModName}EntityRenderers.class); }
 
 	@SubscribeEvent public static void registerEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {

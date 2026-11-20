@@ -496,7 +496,7 @@ public class ${name}Entity extends ${extendsClass} <#if interfaces?size gt 0>imp
 		</#if>
 		<#if data.sensitiveToVibration>
 		VibrationSystem.Data.CODEC.encodeStart(this.registryAccess().createSerializationContext(NbtOps.INSTANCE), this.vibrationData)
-			.resultOrPartial(e -> ${JavaModName}.LOGGER.error("Failed to encode vibration listener for ${name}: '{}'", e))
+			.resultOrPartial(e -> ${package}.${JavaModName}.LOGGER.error("Failed to encode vibration listener for ${name}: '{}'", e))
 			.ifPresent(listener -> compound.put("listener", listener));
 		</#if>
 	}
@@ -520,7 +520,7 @@ public class ${name}Entity extends ${extendsClass} <#if interfaces?size gt 0>imp
 		<#if data.sensitiveToVibration>
 		if (compound.contains("listener", Tag.TAG_COMPOUND)) {
 			VibrationSystem.Data.CODEC.parse(this.registryAccess().createSerializationContext(NbtOps.INSTANCE), compound.getCompound("listener"))
-				.resultOrPartial(e -> ${JavaModName}.LOGGER.error("Failed to parse vibration listener for ${name}: '{}'", e))
+				.resultOrPartial(e -> ${package}.${JavaModName}.LOGGER.error("Failed to parse vibration listener for ${name}: '{}'", e))
 				.ifPresent(data -> this.vibrationData = data);
 		}
 		</#if>
@@ -1124,3 +1124,4 @@ public class ${name}Entity extends ${extendsClass} <#if interfaces?size gt 0>imp
 
 }
 <#-- @formatter:off -->
+

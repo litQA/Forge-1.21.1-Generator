@@ -40,7 +40,7 @@ import net.minecraftforge.common.extensions.IForgeMenuType;
 
 public class ${JavaModName}Menus {
 
-	public static final DeferredRegister<MenuType<?>> REGISTRY = DeferredRegister.create(ForgeRegistries.MENU_TYPES, ${JavaModName}.MODID);
+	public static final DeferredRegister<MenuType<?>> REGISTRY = DeferredRegister.create(ForgeRegistries.MENU_TYPES, ${package}.${JavaModName}.MODID);
 
 	<#list guis as gui>
 	public static final RegistryObject<MenuType<${gui.getModElement().getName()}Menu>> ${gui.getModElement().getRegistryNameUpper()}
@@ -55,11 +55,11 @@ public class ${JavaModName}Menus {
 		default void sendMenuStateUpdate(Player player, int elementType, String name, Object elementState, boolean needClientUpdate) {
 			getMenuState().put(elementType + ":" + name, elementState);
 			if (player instanceof ServerPlayer serverPlayer) {
-				${JavaModName}.sendToPlayer(serverPlayer, new MenuStateUpdateMessage(elementType, name, elementState));
+				${package}.${JavaModName}.sendToPlayer(serverPlayer, new MenuStateUpdateMessage(elementType, name, elementState));
 			} else if (player.level().isClientSide) {
-				if (Minecraft.getInstance().screen instanceof ${JavaModName}Screens.ScreenAccessor accessor && needClientUpdate)
+				if (Minecraft.getInstance().screen instanceof ${package}.init.${JavaModName}Screens.ScreenAccessor accessor && needClientUpdate)
 					accessor.updateMenuState(elementType, name, elementState);
-				${JavaModName}.sendToServer(new MenuStateUpdateMessage(elementType, name, elementState));
+				${package}.${JavaModName}.sendToServer(new MenuStateUpdateMessage(elementType, name, elementState));
 			}
 		}
 

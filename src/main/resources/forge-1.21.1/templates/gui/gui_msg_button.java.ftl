@@ -33,10 +33,10 @@
 
 package ${package}.network;
 
-@Mod.EventBusSubscriber(modid = ${JavaModName}.MODID, bus = Mod.EventBusSubscriber.Bus.MOD) public record ${name}ButtonMessage(int buttonID, int x, int y, int z) implements CustomPacketPayload {
+@Mod.EventBusSubscriber(modid = ${package}.${JavaModName}.MODID, bus = Mod.EventBusSubscriber.Bus.MOD) public record ${name}ButtonMessage(int buttonID, int x, int y, int z) implements CustomPacketPayload {
 	static { MinecraftForge.EVENT_BUS.register(${name}ButtonMessage.class); }
 
-	public static final Type<${name}ButtonMessage> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(${JavaModName}.MODID, "${registryname}_buttons"));
+	public static final Type<${name}ButtonMessage> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(${package}.${JavaModName}.MODID, "${registryname}_buttons"));
 
 	public static final StreamCodec<RegistryFriendlyByteBuf, ${name}ButtonMessage> STREAM_CODEC = StreamCodec.of(
 			(RegistryFriendlyByteBuf buffer, ${name}ButtonMessage message) -> {
@@ -88,7 +88,7 @@ package ${package}.network;
 	}
 
 	@SubscribeEvent public static void registerMessage(FMLCommonSetupEvent event) {
-		${JavaModName}.addNetworkMessage(${name}ButtonMessage.TYPE, ${name}ButtonMessage.STREAM_CODEC, ${name}ButtonMessage::handleData);
+		${package}.${JavaModName}.addNetworkMessage(${name}ButtonMessage.TYPE, ${name}ButtonMessage.STREAM_CODEC, ${name}ButtonMessage::handleData);
 	}
 
 }

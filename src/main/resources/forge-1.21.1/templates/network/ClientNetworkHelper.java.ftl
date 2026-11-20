@@ -13,7 +13,7 @@ public final class ClientNetworkHelper {
 	}
 
 	public static void sendToServer(CustomPacketPayload payload) {
-		${JavaModName}.sendToServer(payload, registryAccess());
+		${package}.${JavaModName}.sendToServer(payload, registryAccess());
 	}
 
 	public static RegistryAccess registryAccess() {
@@ -26,3 +26,4 @@ public final class ClientNetworkHelper {
 	}
 
 }
+

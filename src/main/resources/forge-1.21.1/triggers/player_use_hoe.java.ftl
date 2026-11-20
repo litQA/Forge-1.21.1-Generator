@@ -1,5 +1,5 @@
 <#include "procedures.java.ftl">
-@Mod.EventBusSubscriber(modid = ${JavaModName}.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE) public class ${name}Procedure {
+@Mod.EventBusSubscriber(modid = ${package}.${JavaModName}.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE) public class ${name}Procedure {
 	@SubscribeEvent public static void onUseHoe(BlockEvent.BlockToolModificationEvent event) {
 		if (!event.isSimulated() && event.getToolAction() == ToolActions.HOE_TILL && event.getPlayer() != null) {
 			<#assign dependenciesCode>

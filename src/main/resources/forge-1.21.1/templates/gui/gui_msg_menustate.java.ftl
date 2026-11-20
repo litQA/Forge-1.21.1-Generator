@@ -33,10 +33,10 @@
 
 package ${package}.network;
 
-@Mod.EventBusSubscriber(modid = ${JavaModName}.MODID, bus = Mod.EventBusSubscriber.Bus.MOD) public record MenuStateUpdateMessage(int elementType, String name, Object elementState) implements CustomPacketPayload {
+@Mod.EventBusSubscriber(modid = ${package}.${JavaModName}.MODID, bus = Mod.EventBusSubscriber.Bus.MOD) public record MenuStateUpdateMessage(int elementType, String name, Object elementState) implements CustomPacketPayload {
 	static { MinecraftForge.EVENT_BUS.register(MenuStateUpdateMessage.class); }
 
-	public static final Type<MenuStateUpdateMessage> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(${JavaModName}.MODID, "guistate_update"));
+	public static final Type<MenuStateUpdateMessage> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(${package}.${JavaModName}.MODID, "guistate_update"));
 
 	public static final StreamCodec<RegistryFriendlyByteBuf, MenuStateUpdateMessage> STREAM_CODEC = StreamCodec.of(MenuStateUpdateMessage::write, MenuStateUpdateMessage::read);
 
@@ -78,7 +78,7 @@ package ${package}.network;
 		context.enqueueWork(() -> {
 			if (context.player().containerMenu instanceof ${package}.init.${JavaModName}Menus.MenuAccessor menu) {
 				menu.getMenuState().put(message.elementType + ":" + message.name, message.elementState);
-				if (context.flow() == PacketFlow.CLIENTBOUND && Minecraft.getInstance().screen instanceof ${JavaModName}Screens.ScreenAccessor accessor) {
+				if (context.flow() == PacketFlow.CLIENTBOUND && Minecraft.getInstance().screen instanceof ${package}.init.${JavaModName}Screens.ScreenAccessor accessor) {
 					accessor.updateMenuState(message.elementType, message.name, message.elementState);
 				}
 			}
@@ -89,8 +89,9 @@ package ${package}.network;
 	}
 
 	@SubscribeEvent public static void registerMessage(FMLCommonSetupEvent event) {
-		${JavaModName}.addNetworkMessage(MenuStateUpdateMessage.TYPE, MenuStateUpdateMessage.STREAM_CODEC, MenuStateUpdateMessage::handleMenuState);
+		${package}.${JavaModName}.addNetworkMessage(MenuStateUpdateMessage.TYPE, MenuStateUpdateMessage.STREAM_CODEC, MenuStateUpdateMessage::handleMenuState);
 	}
 
 }
 <#-- @formatter:on -->
+

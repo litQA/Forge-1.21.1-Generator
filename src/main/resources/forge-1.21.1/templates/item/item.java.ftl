@@ -39,12 +39,12 @@ package ${package}.item;
 
 <@javacompress>
 <#if hasCustomJAVAModels>
-@Mod.EventBusSubscriber(modid = ${JavaModName}.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
+@Mod.EventBusSubscriber(modid = ${package}.${JavaModName}.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 </#if>
 public class ${name}Item extends <#if data.hasBannerPatterns()>BannerPattern</#if>Item {
 	static { MinecraftForge.EVENT_BUS.register(${name}Item.class); }
 	<#if data.hasBannerPatterns()>
-	public static final TagKey<BannerPattern> PROVIDED_PATTERNS = TagKey.create(Registries.BANNER_PATTERN, ResourceLocation.fromNamespaceAndPath(${JavaModName}.MODID, "pattern_item/${registryname}"));
+	public static final TagKey<BannerPattern> PROVIDED_PATTERNS = TagKey.create(Registries.BANNER_PATTERN, ResourceLocation.fromNamespaceAndPath(${package}.${JavaModName}.MODID, "pattern_item/${registryname}"));
 	</#if>
 
 	public ${name}Item() {
@@ -79,14 +79,14 @@ public class ${name}Item extends <#if data.hasBannerPatterns()>BannerPattern</#i
 					</#if>
 					<#list data.attributeModifiers as modifier>
 					.add(<#if modifier.attribute?starts_with("Attributes.")>${modifier.attribute}<#else>${modifier.attribute}.getHolder().orElseThrow()</#if>, new AttributeModifier(
-							ResourceLocation.fromNamespaceAndPath(${JavaModName}.MODID, "${registryname}_${modifier?index}"),
+							ResourceLocation.fromNamespaceAndPath(${package}.${JavaModName}.MODID, "${registryname}_${modifier?index}"),
 							${modifier.amount}, AttributeModifier.Operation.${modifier.operation}),
 							<#if modifier.equipmentSlot.getUnmappedValue() == "default">EquipmentSlotGroup.MAINHAND<#else>${modifier.equipmentSlot}</#if>)
 					</#list>
 					.build())
 				</#if>
 				<#if data.isMusicDisc>
-				.jukeboxPlayable(ResourceKey.create(Registries.JUKEBOX_SONG, ResourceLocation.fromNamespaceAndPath(${JavaModName}.MODID, "${registryname}")))
+				.jukeboxPlayable(ResourceKey.create(Registries.JUKEBOX_SONG, ResourceLocation.fromNamespaceAndPath(${package}.${JavaModName}.MODID, "${registryname}")))
 				</#if>
 		);
 	}

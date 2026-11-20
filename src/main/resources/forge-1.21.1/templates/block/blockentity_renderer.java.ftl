@@ -35,7 +35,7 @@ package ${package}.client.renderer.block;
 
 import com.mojang.math.Axis;
 
-@Mod.EventBusSubscriber(modid = ${JavaModName}.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT) public class ${name}Renderer implements BlockEntityRenderer<${name}BlockEntity> {
+@Mod.EventBusSubscriber(modid = ${package}.${JavaModName}.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT) public class ${name}Renderer implements BlockEntityRenderer<${name}BlockEntity> {
 
 	static { MinecraftForge.EVENT_BUS.register(${name}Renderer.class); }
 
@@ -113,7 +113,7 @@ import com.mojang.math.Axis;
 	}
 
 	@SubscribeEvent public static void registerBlockEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
-		event.registerBlockEntityRenderer(${JavaModName}BlockEntities.${REGISTRYNAME}.get(), ${name}Renderer::new);
+		event.registerBlockEntityRenderer(${package}.init.${JavaModName}BlockEntities.${REGISTRYNAME}.get(), ${name}Renderer::new);
 	}
 
 	private static final class CustomHierarchicalModel extends ${data.customModelName.split(":")[0]} {

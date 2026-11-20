@@ -38,7 +38,7 @@ package ${package}.init;
 
 public class ${JavaModName}Fluids {
 
-	public static final DeferredRegister<Fluid> REGISTRY = DeferredRegister.create(ForgeRegistries.FLUIDS, ${JavaModName}.MODID);
+	public static final DeferredRegister<Fluid> REGISTRY = DeferredRegister.create(ForgeRegistries.FLUIDS, ${package}.${JavaModName}.MODID);
 
 	<#list fluids as fluid>
 	public static final RegistryObject<FlowingFluid> ${fluid.getModElement().getRegistryNameUpper()} =
@@ -47,7 +47,7 @@ public class ${JavaModName}Fluids {
 		REGISTRY.register("flowing_${fluid.getModElement().getRegistryName()}", ${fluid.getModElement().getName()}Fluid.Flowing::new);
 	</#list>
 
-	@Mod.EventBusSubscriber(modid = ${JavaModName}.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT) public static class FluidsClientSideHandler {
+	@Mod.EventBusSubscriber(modid = ${package}.${JavaModName}.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT) public static class FluidsClientSideHandler {
 	static { MinecraftForge.EVENT_BUS.register(FluidsClientSideHandler.class); }
 		@SubscribeEvent public static void clientSetup(FMLClientSetupEvent event) {
 			<#list fluids as fluid>

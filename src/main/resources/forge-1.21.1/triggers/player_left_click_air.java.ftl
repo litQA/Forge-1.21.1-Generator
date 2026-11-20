@@ -1,5 +1,5 @@
 <#include "procedures.java.ftl">
-@Mod.EventBusSubscriber(modid = ${JavaModName}.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT) public class ${name}Procedure {
+@Mod.EventBusSubscriber(modid = ${package}.${JavaModName}.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT) public class ${name}Procedure {
 	@SubscribeEvent public static void onLeftClick(PlayerInteractEvent.LeftClickEmpty event) {
 		<#assign dependenciesCode>
 			<@procedureDependenciesCode dependencies, {
@@ -10,14 +10,14 @@
 				"entity": "event.getEntity()"
 			}/>
 		</#assign>
-		${JavaModName}.sendToServer(new ${name}Message());
+		${package}.${JavaModName}.sendToServer(new ${name}Message());
 		execute(${dependenciesCode});
 	}
 
-	@Mod.EventBusSubscriber(modid = ${JavaModName}.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
+	@Mod.EventBusSubscriber(modid = ${package}.${JavaModName}.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 	public record ${name}Message() implements CustomPacketPayload {
 		public static final CustomPacketPayload.Type<${name}Message> TYPE = new CustomPacketPayload.Type<>(
-				ResourceLocation.fromNamespaceAndPath(${JavaModName}.MODID, "procedure_${registryname}"));
+				ResourceLocation.fromNamespaceAndPath(${package}.${JavaModName}.MODID, "procedure_${registryname}"));
 		public static final StreamCodec<RegistryFriendlyByteBuf, ${name}Message> STREAM_CODEC = StreamCodec.unit(new ${name}Message());
 
 		@Override public CustomPacketPayload.Type<? extends CustomPacketPayload> type() {
@@ -49,6 +49,7 @@
 		}
 
 		@SubscribeEvent public static void registerMessage(FMLCommonSetupEvent event) {
-			${JavaModName}.addNetworkMessage(${name}Message.TYPE, ${name}Message.STREAM_CODEC, ${name}Message::handleData);
+			${package}.${JavaModName}.addNetworkMessage(${name}Message.TYPE, ${name}Message.STREAM_CODEC, ${name}Message::handleData);
 		}
 	}
+

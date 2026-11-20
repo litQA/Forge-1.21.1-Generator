@@ -24,7 +24,7 @@ import ${package}.${JavaModName};
 public final class ${JavaModName}LootModifiers {
 
 	public static final DeferredRegister<MapCodec<? extends IGlobalLootModifier>> REGISTRY = DeferredRegister
-			.create(ForgeRegistries.GLOBAL_LOOT_MODIFIER_SERIALIZERS.getKey(), ${JavaModName}.MODID);
+			.create(ForgeRegistries.GLOBAL_LOOT_MODIFIER_SERIALIZERS.getKey(), ${package}.${JavaModName}.MODID);
 
 	public static final RegistryObject<MapCodec<? extends IGlobalLootModifier>> ADD_TABLE = REGISTRY
 			.register("add_table", () -> AddTable.CODEC);
@@ -54,3 +54,4 @@ public final class ${JavaModName}LootModifiers {
 		}
 	}
 }
+

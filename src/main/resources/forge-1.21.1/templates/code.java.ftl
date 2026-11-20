@@ -46,7 +46,7 @@
 
 package ${package};
 
-@Mod.EventBusSubscriber(modid = ${JavaModName}.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
+@Mod.EventBusSubscriber(modid = ${package}.${JavaModName}.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ${name} {
 	static { MinecraftForge.EVENT_BUS.register(${name}.class); }
 
@@ -65,7 +65,7 @@ public class ${name} {
 
 	}
 
-    @Mod.EventBusSubscriber(modid = ${JavaModName}.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
+    @Mod.EventBusSubscriber(modid = ${package}.${JavaModName}.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 	private static class ${name}ForgeBusEvents {
 
 		@SubscribeEvent

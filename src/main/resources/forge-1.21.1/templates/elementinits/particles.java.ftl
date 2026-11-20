@@ -36,7 +36,7 @@
 
 package ${package}.init;
 
-@Mod.EventBusSubscriber(modid = ${JavaModName}.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT) public class ${JavaModName}Particles {
+@Mod.EventBusSubscriber(modid = ${package}.${JavaModName}.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT) public class ${JavaModName}Particles {
 	static { MinecraftForge.EVENT_BUS.register(${JavaModName}Particles.class); }
 
 	@SubscribeEvent public static void registerParticles(RegisterParticleProvidersEvent event) {

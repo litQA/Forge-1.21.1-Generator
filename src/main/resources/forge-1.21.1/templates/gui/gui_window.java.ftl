@@ -40,7 +40,7 @@ package ${package}.client.gui;
 <#assign sliders = data.getComponentsOfType("Slider")>
 
 <@javacompress>
-public class ${name}Screen extends AbstractContainerScreen<${name}Menu> implements ${JavaModName}Screens.ScreenAccessor {
+public class ${name}Screen extends AbstractContainerScreen<${name}Menu> implements ${package}.init.${JavaModName}Screens.ScreenAccessor {
 
 	private final Level world;
 	private final int x, y, z;
@@ -146,7 +146,7 @@ public class ${name}Screen extends AbstractContainerScreen<${name}Menu> implemen
 				<#if hasProcedure(component.displayCondition)>
 					if (<@procedureOBJToConditionCode component.displayCondition/>)
 				</#if>
-				${JavaModName}Screens.renderEntityInInventoryFollowsAngle(guiGraphics, this.leftPos + ${x + 10}, this.topPos + ${y + 20}, ${component.scale},
+				${package}.init.${JavaModName}Screens.renderEntityInInventoryFollowsAngle(guiGraphics, this.leftPos + ${x + 10}, this.topPos + ${y + 20}, ${component.scale},
 					${component.rotationX / 20.0}f <#if followMouse> + (float) Math.atan((this.leftPos + ${x + 10} - mouseX) / 40.0)</#if>,
 					<#if followMouse>(float) Math.atan((this.topPos + ${y + 21 - 50} - mouseY) / 40.0)<#else>0</#if>, livingEntity);
 			}
@@ -346,7 +346,7 @@ public class ${name}Screen extends AbstractContainerScreen<${name}Menu> implemen
 						if (!menuStateUpdateActive)
 							menu.sendMenuStateUpdate(entity, 2, "${component.getName()}", this.getValue(), false);
 						<#if hasProcedure(component.whenSliderMoves)>
-							${JavaModName}.sendToServer(new ${name}SliderMessage(${slid}, x, y, z, this.getValue()));
+							${package}.${JavaModName}.sendToServer(new ${name}SliderMessage(${slid}, x, y, z, this.getValue()));
 							${name}SliderMessage.handleSliderAction(entity, ${slid}, x, y, z, this.getValue());
 						</#if>
 					}
@@ -387,7 +387,7 @@ e -> {
 		int x = ${name}Screen.this.x; <#-- #5582 - x and y provided by buttons are in-GUI, not in-world coordinates -->
 		int y = ${name}Screen.this.y;
 		if (<@procedureOBJToConditionCode component.displayCondition/>) {
-			${JavaModName}.sendToServer(new ${name}ButtonMessage(${btid}, x, y, z));
+			${package}.${JavaModName}.sendToServer(new ${name}ButtonMessage(${btid}, x, y, z));
 			${name}ButtonMessage.handleButtonAction(entity, ${btid}, x, y, z);
 		}
 	</#if>
@@ -418,3 +418,4 @@ e -> {
 	</#if>
 </#macro>
 <#-- @formatter:on -->
+

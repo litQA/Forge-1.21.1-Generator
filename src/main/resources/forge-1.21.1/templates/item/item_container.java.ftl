@@ -44,7 +44,7 @@ import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.ItemStackHandler;
 
 <@javacompress>
-@Mod.EventBusSubscriber(modid = ${JavaModName}.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE) public class ${name}InventoryCapability extends ItemStackHandler implements ICapabilityProvider {
+@Mod.EventBusSubscriber(modid = ${package}.${JavaModName}.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE) public class ${name}InventoryCapability extends ItemStackHandler implements ICapabilityProvider {
 
 	public ${name}InventoryCapability(ItemStack stack) {
 		super(${data.inventorySize});
@@ -68,7 +68,7 @@ import net.minecraftforge.items.ItemStackHandler;
 	</#if>
 
 	@Override public boolean isItemValid(int slot, @Nonnull ItemStack stack) {
-		return stack.getItem() != ${JavaModName}Items.${REGISTRYNAME}.get();
+		return stack.getItem() != ${package}.init.${JavaModName}Items.${REGISTRYNAME}.get();
 	}
 
 	@Override protected void onContentsChanged(int slot) {
@@ -87,3 +87,4 @@ import net.minecraftforge.items.ItemStackHandler;
 </@javacompress>
 
 <#-- @formatter:on -->
+

@@ -38,12 +38,12 @@
 
 package ${package}.init;
 
-@Mod.EventBusSubscriber(modid = ${JavaModName}.MODID, bus = Mod.EventBusSubscriber.Bus.MOD) public class ${JavaModName}VillagerProfessions {
+@Mod.EventBusSubscriber(modid = ${package}.${JavaModName}.MODID, bus = Mod.EventBusSubscriber.Bus.MOD) public class ${JavaModName}VillagerProfessions {
 	static { MinecraftForge.EVENT_BUS.register(${JavaModName}VillagerProfessions.class); }
 
 	private static final Map<String, ProfessionPoiType> POI_TYPES = new HashMap<>();
 
-	public static final DeferredRegister<VillagerProfession> PROFESSIONS = DeferredRegister.create(ForgeRegistries.VILLAGER_PROFESSIONS, ${JavaModName}.MODID);
+	public static final DeferredRegister<VillagerProfession> PROFESSIONS = DeferredRegister.create(ForgeRegistries.VILLAGER_PROFESSIONS, ${package}.${JavaModName}.MODID);
 
 	<#list villagerprofessions as villagerprofession>
 		public static final RegistryObject<VillagerProfession> ${villagerprofession.getModElement().getRegistryNameUpper()} =
@@ -59,7 +59,7 @@ package ${package}.init;
 
 		return PROFESSIONS.register(name, () -> {
 			Predicate<Holder<PoiType>> poiPredicate = poiTypeHolder -> (POI_TYPES.get(name).poiType != null) && (poiTypeHolder.value() == POI_TYPES.get(name).poiType.value());
-			return new VillagerProfession(${JavaModName}.MODID + ":" + name, poiPredicate, poiPredicate, ImmutableSet.of(), ImmutableSet.of(), soundEvent.get());
+			return new VillagerProfession(${package}.${JavaModName}.MODID + ":" + name, poiPredicate, poiPredicate, ImmutableSet.of(), ImmutableSet.of(), soundEvent.get());
 		});
 	}
 
@@ -71,7 +71,7 @@ package ${package}.init;
 
 				Optional<Holder<PoiType>> existingCheck = PoiTypes.forState(block.defaultBlockState());
 				if (existingCheck.isPresent()) {
-					${JavaModName}.LOGGER.error("Skipping villager profession " + name + " that uses POI block " + block + " that is already in use by " + existingCheck);
+					${package}.${JavaModName}.LOGGER.error("Skipping villager profession " + name + " that uses POI block " + block + " that is already in use by " + existingCheck);
 					continue;
 				}
 

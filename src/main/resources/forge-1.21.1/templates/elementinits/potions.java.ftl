@@ -38,7 +38,7 @@ package ${package}.init;
 
 public class ${JavaModName}Potions {
 
-	public static final DeferredRegister<Potion> REGISTRY = DeferredRegister.create(ForgeRegistries.POTIONS, ${JavaModName}.MODID);
+	public static final DeferredRegister<Potion> REGISTRY = DeferredRegister.create(ForgeRegistries.POTIONS, ${package}.${JavaModName}.MODID);
 
 	<#list potions as potion>
 		public static final RegistryObject<Potion> ${potion.getModElement().getRegistryNameUpper()} = REGISTRY.register("${potion.getModElement().getRegistryName()}",

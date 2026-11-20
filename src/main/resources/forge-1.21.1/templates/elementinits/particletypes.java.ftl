@@ -38,7 +38,7 @@ package ${package}.init;
 
 public class ${JavaModName}ParticleTypes {
 
-	public static final DeferredRegister<ParticleType<?>> REGISTRY = DeferredRegister.create(ForgeRegistries.PARTICLE_TYPES, ${JavaModName}.MODID);
+	public static final DeferredRegister<ParticleType<?>> REGISTRY = DeferredRegister.create(ForgeRegistries.PARTICLE_TYPES, ${package}.${JavaModName}.MODID);
 
 	<#list particles as particle>
 	public static final RegistryObject<SimpleParticleType> ${particle.getModElement().getRegistryNameUpper()} =

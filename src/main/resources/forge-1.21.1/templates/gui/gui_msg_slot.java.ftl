@@ -33,10 +33,10 @@
 
 package ${package}.network;
 
-@Mod.EventBusSubscriber(modid = ${JavaModName}.MODID, bus = Mod.EventBusSubscriber.Bus.MOD) public record ${name}SlotMessage(int slotID, int x, int y, int z, int changeType, int meta) implements CustomPacketPayload {
+@Mod.EventBusSubscriber(modid = ${package}.${JavaModName}.MODID, bus = Mod.EventBusSubscriber.Bus.MOD) public record ${name}SlotMessage(int slotID, int x, int y, int z, int changeType, int meta) implements CustomPacketPayload {
 	static { MinecraftForge.EVENT_BUS.register(${name}SlotMessage.class); }
 
-	public static final Type<${name}SlotMessage> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(${JavaModName}.MODID, "${registryname}_slots"));
+	public static final Type<${name}SlotMessage> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(${package}.${JavaModName}.MODID, "${registryname}_slots"));
 
 	public static final StreamCodec<RegistryFriendlyByteBuf, ${name}SlotMessage> STREAM_CODEC = StreamCodec.of(
 			(RegistryFriendlyByteBuf buffer, ${name}SlotMessage message) -> {
@@ -94,7 +94,7 @@ package ${package}.network;
 	}
 
 	@SubscribeEvent public static void registerMessage(FMLCommonSetupEvent event) {
-		${JavaModName}.addNetworkMessage(${name}SlotMessage.TYPE, ${name}SlotMessage.STREAM_CODEC, ${name}SlotMessage::handleData);
+		${package}.${JavaModName}.addNetworkMessage(${name}SlotMessage.TYPE, ${name}SlotMessage.STREAM_CODEC, ${name}SlotMessage::handleData);
 	}
 
 }

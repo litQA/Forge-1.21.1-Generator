@@ -34,7 +34,7 @@
 
 package ${package}.world.features.treedecorators;
 
-@Mod.EventBusSubscriber(modid = ${JavaModName}.MODID, bus = Mod.EventBusSubscriber.Bus.MOD) public class ${name}LeaveDecorator extends LeaveVineDecorator {
+@Mod.EventBusSubscriber(modid = ${package}.${JavaModName}.MODID, bus = Mod.EventBusSubscriber.Bus.MOD) public class ${name}LeaveDecorator extends LeaveVineDecorator {
 	static { MinecraftForge.EVENT_BUS.register(${name}LeaveDecorator.class); }
 
     public static MapCodec<${name}LeaveDecorator> CODEC = MapCodec.unit(${name}LeaveDecorator::new);
@@ -107,3 +107,4 @@ package ${package}.world.features.treedecorators;
 
 }
 <#-- @formatter:on -->
+

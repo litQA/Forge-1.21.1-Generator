@@ -36,7 +36,7 @@
 
 package ${package}.init;
 
-@Mod.EventBusSubscriber(modid = ${JavaModName}.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
+@Mod.EventBusSubscriber(modid = ${package}.${JavaModName}.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ${JavaModName}GameRules {
 	static { MinecraftForge.EVENT_BUS.register(${JavaModName}GameRules.class); }
 

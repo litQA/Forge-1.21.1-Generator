@@ -34,7 +34,7 @@
 
 package ${package}.world.features.treedecorators;
 
-@Mod.EventBusSubscriber(modid = ${JavaModName}.MODID, bus = Mod.EventBusSubscriber.Bus.MOD) public class ${name}TrunkDecorator extends TrunkVineDecorator {
+@Mod.EventBusSubscriber(modid = ${package}.${JavaModName}.MODID, bus = Mod.EventBusSubscriber.Bus.MOD) public class ${name}TrunkDecorator extends TrunkVineDecorator {
 	static { MinecraftForge.EVENT_BUS.register(${name}TrunkDecorator.class); }
 
     public static MapCodec<${name}TrunkDecorator> CODEC = MapCodec.unit(${name}TrunkDecorator::new);
@@ -94,3 +94,4 @@ package ${package}.world.features.treedecorators;
 
 }
 <#-- @formatter:on -->
+

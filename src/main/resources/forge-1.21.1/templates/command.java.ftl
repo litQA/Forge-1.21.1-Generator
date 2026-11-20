@@ -33,7 +33,7 @@
 
 package ${package}.command;
 
-@Mod.EventBusSubscriber(modid = ${JavaModName}.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE<#if data.type == "CLIENTSIDE">, value = Dist.CLIENT</#if>)
+@Mod.EventBusSubscriber(modid = ${package}.${JavaModName}.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE<#if data.type == "CLIENTSIDE">, value = Dist.CLIENT</#if>)
 public class ${name}Command {
 
 	<#if data.type == "CLIENTSIDE">

@@ -41,8 +41,8 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
 <#assign hasEntityModels = false>
 
-@Mod.EventBusSubscriber(modid = ${JavaModName}.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT) public class ${JavaModName}Screens {
-	static { MinecraftForge.EVENT_BUS.register(${JavaModName}Screens.class); }
+@Mod.EventBusSubscriber(modid = ${package}.${JavaModName}.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT) public class ${JavaModName}Screens {
+	static { MinecraftForge.EVENT_BUS.register(${package}.init.${JavaModName}Screens.class); }
 
 	@SubscribeEvent public static void clientLoad(FMLClientSetupEvent event) {
 		event.enqueueWork(() -> {
@@ -84,3 +84,4 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 }
 
 <#-- @formatter:on -->
+

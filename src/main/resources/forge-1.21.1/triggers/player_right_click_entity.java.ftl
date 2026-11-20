@@ -1,5 +1,5 @@
 <#include "procedures.java.ftl">
-@Mod.EventBusSubscriber(modid = ${JavaModName}.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE) public class ${name}Procedure {
+@Mod.EventBusSubscriber(modid = ${package}.${JavaModName}.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE) public class ${name}Procedure {
 	@SubscribeEvent public static void onRightClickEntity(PlayerInteractEvent.EntityInteract event) {
 		<#-- fix #5491, event is fired for both hands always, so we can filter by either -->
 		if (event.getHand() != InteractionHand.MAIN_HAND) return;

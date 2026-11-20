@@ -35,7 +35,7 @@ package ${package}.potion;
 
 <@javacompress>
 <#if data.hasCustomRenderer()>
-@Mod.EventBusSubscriber(modid = ${JavaModName}.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
+@Mod.EventBusSubscriber(modid = ${package}.${JavaModName}.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 </#if>
 public class ${name}MobEffect extends <#if data.isInstant>Instantenous</#if>MobEffect {
 	static { MinecraftForge.EVENT_BUS.register(${name}MobEffect.class); }
@@ -47,7 +47,7 @@ public class ${name}MobEffect extends <#if data.isInstant>Instantenous</#if>MobE
 		</#if>
 		<#list data.modifiers as modifier>
 		this.addAttributeModifier(<#if modifier.attribute?starts_with("Attributes.")>${modifier.attribute}<#else>${modifier.attribute}.getHolder().orElseThrow()</#if>,
-				ResourceLocation.fromNamespaceAndPath(${JavaModName}.MODID, "effect.${registryname}_${modifier?index}"),
+				ResourceLocation.fromNamespaceAndPath(${package}.${JavaModName}.MODID, "effect.${registryname}_${modifier?index}"),
 				${modifier.amount}, AttributeModifier.Operation.${modifier.operation});
 		</#list>
 	}

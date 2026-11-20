@@ -435,3 +435,5 @@ public class ${name}BlockEntity extends RandomizableContainerBlockEntity impleme
 }
 </@javacompress>
 <#-- @formatter:on -->
+
+

@@ -43,7 +43,7 @@ import ${package}.trade.BasicItemListing;
 import net.minecraftforge.event.village.VillagerTradesEvent;
 import net.minecraftforge.event.village.WandererTradesEvent;
 
-@Mod.EventBusSubscriber(modid = ${JavaModName}.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE) public class ${JavaModName}Trades {
+@Mod.EventBusSubscriber(modid = ${package}.${JavaModName}.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE) public class ${JavaModName}Trades {
 
 	<#if villagertrades?filter(e -> e.isWanderingTrader())?size != 0>
 	@SubscribeEvent public static void registerWanderingTrades(WandererTradesEvent event) {
@@ -86,3 +86,4 @@ import net.minecraftforge.event.village.WandererTradesEvent;
 	</#if>
 
 }
+

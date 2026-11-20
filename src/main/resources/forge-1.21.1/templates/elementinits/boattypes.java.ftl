@@ -40,7 +40,7 @@ package ${package}.init;
 <#assign boatsWithTickEvent = specialentities?filter(e -> hasProcedure(e.onTickUpdate))>
 
 <#if boatsWithTickEvent?size gt 0>
-@Mod.EventBusSubscriber(modid = ${JavaModName}.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
+@Mod.EventBusSubscriber(modid = ${package}.${JavaModName}.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 </#if>public class ${JavaModName}BoatTypes {
 
 	<#if boatsWithTickEvent?size gt 0>
@@ -62,3 +62,4 @@ package ${package}.init;
 	}
 	</#if>
 }
+

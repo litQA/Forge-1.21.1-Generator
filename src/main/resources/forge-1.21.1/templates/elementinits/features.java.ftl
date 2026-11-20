@@ -38,7 +38,7 @@ package ${package}.init;
 
 public class ${JavaModName}Features {
 
-	public static final DeferredRegister<Feature<?>> REGISTRY = DeferredRegister.create(ForgeRegistries.FEATURES, ${JavaModName}.MODID);
+	public static final DeferredRegister<Feature<?>> REGISTRY = DeferredRegister.create(ForgeRegistries.FEATURES, ${package}.${JavaModName}.MODID);
 
 	<#list features as feature>
 	public static final RegistryObject<Feature<?>> ${feature.getModElement().getRegistryNameUpper()} =

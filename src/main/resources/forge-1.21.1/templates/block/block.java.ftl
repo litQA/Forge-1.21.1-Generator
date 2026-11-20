@@ -293,7 +293,7 @@ public class ${getClassName()}Block extends ${getBlockClass(data.blockBase)}
 			.isViewBlocking((bs, br, bp) -> false)
 		</#if>
 		<#if var_extends_class! == "WallSignBlock" || var_extends_class! == "WallHangingSignBlock">
-			.dropsLike(${JavaModName}Blocks.${REGISTRYNAME}.get())
+			.dropsLike(${package}.init.${JavaModName}Blocks.${REGISTRYNAME}.get())
 		</#if>
 	</#macro>
 
@@ -863,7 +863,7 @@ public class ${getClassName()}Block extends ${getBlockClass(data.blockBase)}
 						Minecraft.getInstance().level.getBiome(pos).value().getWaterFogColor() : 329011;
 					</#if>
 				</#if>
-			}, ${JavaModName}Blocks.${REGISTRYNAME}.get());
+			}, ${package}.init.${JavaModName}Blocks.${REGISTRYNAME}.get());
 		}
 
 		<#if data.isItemTinted && data.hasBlockItem>
@@ -888,7 +888,7 @@ public class ${getClassName()}Block extends ${getBlockClass(data.blockBase)}
 				<#else>
 					return 329011;
 				</#if>
-			}, ${JavaModName}Blocks.${REGISTRYNAME}.get());
+			}, ${package}.init.${JavaModName}Blocks.${REGISTRYNAME}.get());
 		}
 		</#if>
 	</#if>
@@ -938,5 +938,7 @@ public class ${getClassName()}Block extends ${getBlockClass(data.blockBase)}
 	<#else><#return blockBase + "Block">
 	</#if>
 </#function>
+
+
 
 

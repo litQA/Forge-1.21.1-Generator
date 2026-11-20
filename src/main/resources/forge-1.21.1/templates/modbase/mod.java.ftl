@@ -66,15 +66,15 @@ import ${package}.world.biomemodifier.${JavaModName}BiomeModifiers;
 
 		<@javacompress>
 		<#if w.hasSounds()>${JavaModName}Sounds.REGISTRY.register(modEventBus);</#if>
-		<#if types.base_blocks?has_content>${JavaModName}Blocks.REGISTRY.register(modEventBus);</#if>
-		<#if types.base_blockentities?has_content>${JavaModName}BlockEntities.REGISTRY.register(modEventBus);</#if>
-		<#if types.base_items?has_content>${JavaModName}Items.REGISTRY.register(modEventBus);</#if>
+		<#if types.base_blocks?has_content>${package}.init.${JavaModName}Blocks.REGISTRY.register(modEventBus);</#if>
+		<#if types.base_blockentities?has_content>${package}.init.${JavaModName}BlockEntities.REGISTRY.register(modEventBus);</#if>
+		<#if types.base_items?has_content>${package}.init.${JavaModName}Items.REGISTRY.register(modEventBus);</#if>
 		<#if types.base_entities?has_content>${JavaModName}Entities.REGISTRY.register(modEventBus);</#if>
 		<#if w.hasItemsInTabs()>${JavaModName}Tabs.REGISTRY.register(modEventBus);</#if>
 		<#if types.base_features?has_content>${JavaModName}Features.REGISTRY.register(modEventBus);</#if>
 		<#if types.features?filter(e -> e.getModElement().getMetadata("has_nbt_structure")??)?size != 0>StructureFeature.REGISTRY.register(modEventBus);</#if>
 		<#if types.potions?has_content>${JavaModName}Potions.REGISTRY.register(modEventBus);</#if>
-		<#if types.potioneffects?has_content>${JavaModName}MobEffects.REGISTRY.register(modEventBus);</#if>
+		<#if types.potioneffects?has_content>${package}.init.${JavaModName}MobEffects.REGISTRY.register(modEventBus);</#if>
 		<#if types.guis?has_content>${package}.init.${JavaModName}Menus.REGISTRY.register(modEventBus);</#if>
 		<#if types.particles?has_content>${JavaModName}ParticleTypes.REGISTRY.register(modEventBus);</#if>
 		<#if types.villagerprofessions?has_content>${JavaModName}VillagerProfessions.PROFESSIONS.register(modEventBus);</#if>
@@ -272,4 +272,5 @@ import ${package}.world.biomemodifier.${JavaModName}BiomeModifiers;
 
 }
 <#-- @formatter:on -->
+
 

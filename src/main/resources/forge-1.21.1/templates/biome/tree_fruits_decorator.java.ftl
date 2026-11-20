@@ -34,7 +34,7 @@
 
 package ${package}.world.features.treedecorators;
 
-@Mod.EventBusSubscriber(modid = ${JavaModName}.MODID, bus = Mod.EventBusSubscriber.Bus.MOD) public class ${name}FruitDecorator extends CocoaDecorator {
+@Mod.EventBusSubscriber(modid = ${package}.${JavaModName}.MODID, bus = Mod.EventBusSubscriber.Bus.MOD) public class ${name}FruitDecorator extends CocoaDecorator {
 	static { MinecraftForge.EVENT_BUS.register(${name}FruitDecorator.class); }
 
     public static MapCodec<${name}FruitDecorator> CODEC = MapCodec.unit(${name}FruitDecorator::new);
@@ -84,3 +84,4 @@ package ${package}.world.features.treedecorators;
 
 }
 <#-- @formatter:on -->
+

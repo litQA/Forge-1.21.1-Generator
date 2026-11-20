@@ -44,8 +44,8 @@ public abstract class ${name}Fluid extends ForgeFlowingFluid {
 		<#if data.flowRate != 5>.tickRate(${data.flowRate})</#if>
 		<#if data.levelDecrease != 1>.levelDecreasePerBlock(${data.levelDecrease})</#if>
 		<#if data.slopeFindDistance != 4>.slopeFindDistance(${data.slopeFindDistance})</#if>
-		<#if data.generateBucket>.bucket(() -> ${JavaModName}Items.${REGISTRYNAME}_BUCKET.get())</#if>
-		.block(() -> (LiquidBlock) ${JavaModName}Blocks.${REGISTRYNAME}.get());
+		<#if data.generateBucket>.bucket(() -> ${package}.init.${JavaModName}Items.${REGISTRYNAME}_BUCKET.get())</#if>
+		.block(() -> (LiquidBlock) ${package}.init.${JavaModName}Blocks.${REGISTRYNAME}.get());
 
 	private ${name}Fluid() {
 		super(PROPERTIES);

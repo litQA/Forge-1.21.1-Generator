@@ -1,1 +1,1 @@
-${JavaModName}.LOGGER.${field$message_type}(${input$message});
+${package}.${JavaModName}.LOGGER.${field$message_type}(${input$message});

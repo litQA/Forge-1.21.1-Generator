@@ -32,7 +32,7 @@
 package ${package}.world.features;
 
 public class StructureFeature extends Feature<StructureFeatureConfiguration> {
-	public static final DeferredRegister<Feature<?>> REGISTRY = DeferredRegister.create(ForgeRegistries.FEATURES, ${JavaModName}.MODID);
+	public static final DeferredRegister<Feature<?>> REGISTRY = DeferredRegister.create(ForgeRegistries.FEATURES, ${package}.${JavaModName}.MODID);
 	public static final RegistryObject<StructureFeature> STRUCTURE_FEATURE = REGISTRY.register("structure_feature", () -> new StructureFeature(StructureFeatureConfiguration.CODEC));
 
 	public StructureFeature(Codec<StructureFeatureConfiguration> codec) {
@@ -56,3 +56,4 @@ public class StructureFeature extends Feature<StructureFeatureConfiguration> {
 	}
 }
 <#-- @formatter:on -->
+

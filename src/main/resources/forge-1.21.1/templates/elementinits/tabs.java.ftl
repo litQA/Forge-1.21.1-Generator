@@ -43,13 +43,13 @@
 package ${package}.init;
 
 <#if vanillaTabs?has_content>
-@Mod.EventBusSubscriber(modid = ${JavaModName}.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
+@Mod.EventBusSubscriber(modid = ${package}.${JavaModName}.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 </#if>
 <@javacompress>
 public class ${JavaModName}Tabs {
 	static { MinecraftForge.EVENT_BUS.register(${JavaModName}Tabs.class); }
 
-	public static final DeferredRegister<CreativeModeTab> REGISTRY = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, ${JavaModName}.MODID);
+	public static final DeferredRegister<CreativeModeTab> REGISTRY = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, ${package}.${JavaModName}.MODID);
 
 	<#list customTabs as customTab>
 		<#assign tab = w.getWorkspace().getModElementByName(customTab.replace("CUSTOM:", "")).getGeneratableElement()>

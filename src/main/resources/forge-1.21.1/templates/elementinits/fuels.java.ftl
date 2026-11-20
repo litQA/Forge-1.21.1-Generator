@@ -39,7 +39,7 @@
 
 package ${package}.init;
 
-@Mod.EventBusSubscriber(modid = ${JavaModName}.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE) public class ${JavaModName}Fuels {
+@Mod.EventBusSubscriber(modid = ${package}.${JavaModName}.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE) public class ${JavaModName}Fuels {
 
 	@SubscribeEvent public static void furnaceFuelBurnTimeEvent(FurnaceFuelBurnTimeEvent event) {
 		<@javacompress>

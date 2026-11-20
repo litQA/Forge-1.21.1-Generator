@@ -31,7 +31,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 
-@Mod.EventBusSubscriber(modid = ${JavaModName}.MODID, bus = Mod.EventBusSubscriber.Bus.MOD) public class ${JavaModName}Variables {
+@Mod.EventBusSubscriber(modid = ${package}.${JavaModName}.MODID, bus = Mod.EventBusSubscriber.Bus.MOD) public class ${JavaModName}Variables {
 
 	<#if w.hasVariablesOfScope("GLOBAL_SESSION")>
 		<#list variables as var>
@@ -43,35 +43,35 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 
 	@SubscribeEvent public static void init(FMLCommonSetupEvent event) {
 		<#if w.hasVariablesOfScope("GLOBAL_WORLD") || w.hasVariablesOfScope("GLOBAL_MAP")>
-			${JavaModName}.addNetworkMessage(SavedDataSyncMessage.TYPE, SavedDataSyncMessage.STREAM_CODEC, SavedDataSyncMessage::handleData);
+			${package}.${JavaModName}.addNetworkMessage(SavedDataSyncMessage.TYPE, SavedDataSyncMessage.STREAM_CODEC, SavedDataSyncMessage::handleData);
 		</#if>
 
 		<#if w.hasVariablesOfScope("PLAYER_LIFETIME") || w.hasVariablesOfScope("PLAYER_PERSISTENT")>
-			${JavaModName}.addNetworkMessage(PlayerVariablesSyncMessage.TYPE, PlayerVariablesSyncMessage.STREAM_CODEC, PlayerVariablesSyncMessage::handleData);
+			${package}.${JavaModName}.addNetworkMessage(PlayerVariablesSyncMessage.TYPE, PlayerVariablesSyncMessage.STREAM_CODEC, PlayerVariablesSyncMessage::handleData);
 		</#if>
 	}
 
 	<#if w.hasVariablesOfScope("GLOBAL_WORLD") || w.hasVariablesOfScope("GLOBAL_MAP") || w.hasVariablesOfScope("PLAYER_LIFETIME") || w.hasVariablesOfScope("PLAYER_PERSISTENT")>
-	@Mod.EventBusSubscriber(modid = ${JavaModName}.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE) public static class EventBusVariableHandlers {
+	@Mod.EventBusSubscriber(modid = ${package}.${JavaModName}.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE) public static class EventBusVariableHandlers {
 		<#if w.hasVariablesOfScope("PLAYER_LIFETIME") || w.hasVariablesOfScope("PLAYER_PERSISTENT")>
 		@SubscribeEvent public static void onPlayerLoggedInSyncPlayerVariables(PlayerEvent.PlayerLoggedInEvent event) {
 			if (event.getEntity() instanceof ServerPlayer player)
-				${JavaModName}.sendToPlayer(player, new PlayerVariablesSyncMessage(getPlayerVariables(player)));
+				${package}.${JavaModName}.sendToPlayer(player, new PlayerVariablesSyncMessage(getPlayerVariables(player)));
 		}
 
 		@SubscribeEvent public static void onPlayerRespawnedSyncPlayerVariables(PlayerEvent.PlayerRespawnEvent event) {
 			if (event.getEntity() instanceof ServerPlayer player)
-				${JavaModName}.sendToPlayer(player, new PlayerVariablesSyncMessage(getPlayerVariables(player)));
+				${package}.${JavaModName}.sendToPlayer(player, new PlayerVariablesSyncMessage(getPlayerVariables(player)));
 		}
 
 		@SubscribeEvent public static void onPlayerChangedDimensionSyncPlayerVariables(PlayerEvent.PlayerChangedDimensionEvent event) {
 			if (event.getEntity() instanceof ServerPlayer player)
-				${JavaModName}.sendToPlayer(player, new PlayerVariablesSyncMessage(getPlayerVariables(player)));
+				${package}.${JavaModName}.sendToPlayer(player, new PlayerVariablesSyncMessage(getPlayerVariables(player)));
 		}
 
 		@SubscribeEvent public static void onPlayerTickUpdateSyncPlayerVariables(TickEvent.PlayerTickEvent event) {
 			if (event.phase == TickEvent.Phase.END && event.player instanceof ServerPlayer player && getPlayerVariables(player)._syncDirty) {
-				${JavaModName}.sendToPlayer(player, new PlayerVariablesSyncMessage(getPlayerVariables(player)));
+				${package}.${JavaModName}.sendToPlayer(player, new PlayerVariablesSyncMessage(getPlayerVariables(player)));
 				getPlayerVariables(player)._syncDirty = false;
 			}
 		}
@@ -101,9 +101,9 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 				SavedData mapdata = MapVariables.get(player.level());
 				SavedData worlddata = WorldVariables.get(player.level());
 				if (mapdata != null)
-					${JavaModName}.sendToPlayer(player, new SavedDataSyncMessage(0, mapdata));
+					${package}.${JavaModName}.sendToPlayer(player, new SavedDataSyncMessage(0, mapdata));
 				if (worlddata != null)
-					${JavaModName}.sendToPlayer(player, new SavedDataSyncMessage(1, worlddata));
+					${package}.${JavaModName}.sendToPlayer(player, new SavedDataSyncMessage(1, worlddata));
 			}
 		}
 
@@ -111,7 +111,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 			if (event.getEntity() instanceof ServerPlayer player) {
 				SavedData worlddata = WorldVariables.get(player.level());
 				if (worlddata != null)
-					${JavaModName}.sendToPlayer(player, new SavedDataSyncMessage(1, worlddata));
+					${package}.${JavaModName}.sendToPlayer(player, new SavedDataSyncMessage(1, worlddata));
 			}
 		}
 
@@ -243,7 +243,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 		private final int dataType;
 		private final SavedData data;
 
-		public static final CustomPacketPayload.Type<SavedDataSyncMessage> TYPE = new CustomPacketPayload.Type<>(ResourceLocation.fromNamespaceAndPath(${JavaModName}.MODID, "saved_data_sync"));
+		public static final CustomPacketPayload.Type<SavedDataSyncMessage> TYPE = new CustomPacketPayload.Type<>(ResourceLocation.fromNamespaceAndPath(${package}.${JavaModName}.MODID, "saved_data_sync"));
 
 		public static final StreamCodec<RegistryFriendlyByteBuf, SavedDataSyncMessage> STREAM_CODEC = StreamCodec.of(SavedDataSyncMessage::encode, SavedDataSyncMessage::decode);
 
@@ -428,7 +428,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 
 	public record PlayerVariablesSyncMessage(PlayerVariables data) implements CustomPacketPayload {
 
-		public static final CustomPacketPayload.Type<PlayerVariablesSyncMessage> TYPE = new CustomPacketPayload.Type<>(ResourceLocation.fromNamespaceAndPath(${JavaModName}.MODID, "player_variables_sync"));
+		public static final CustomPacketPayload.Type<PlayerVariablesSyncMessage> TYPE = new CustomPacketPayload.Type<>(ResourceLocation.fromNamespaceAndPath(${package}.${JavaModName}.MODID, "player_variables_sync"));
 
 		public static final StreamCodec<RegistryFriendlyByteBuf, PlayerVariablesSyncMessage> STREAM_CODEC = StreamCodec.of(
 				(RegistryFriendlyByteBuf buffer, PlayerVariablesSyncMessage message) -> {
@@ -462,3 +462,4 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 	</#if>
 }
 <#-- @formatter:on -->
+

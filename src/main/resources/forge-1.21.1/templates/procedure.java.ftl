@@ -31,6 +31,11 @@
 <#-- @formatter:off -->
 package ${package}.procedures;
 
+import ${package}.init.${JavaModName}Blocks;
+import ${package}.init.${JavaModName}Items;
+import ${package}.init.${JavaModName}MobEffects;
+import ${package}.init.${JavaModName}Menus;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;

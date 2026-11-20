@@ -38,7 +38,7 @@
 
 package ${package}.init;
 
-@Mod.EventBusSubscriber(modid = ${JavaModName}.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT) public class ${JavaModName}KeyMappings {
+@Mod.EventBusSubscriber(modid = ${package}.${JavaModName}.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT) public class ${JavaModName}KeyMappings {
 	static { MinecraftForge.EVENT_BUS.register(${JavaModName}KeyMappings.class); }
 
 	<#list keybinds as keybind>
@@ -59,7 +59,7 @@ package ${package}.init;
 
 						if (isDownOld != isDown && isDown) {
 							<#if hasProcedure(keybind.onKeyPressed)>
-								${JavaModName}.sendToServer(new ${keybind.getModElement().getName()}Message(0, 0));
+								${package}.${JavaModName}.sendToServer(new ${keybind.getModElement().getName()}Message(0, 0));
 								${keybind.getModElement().getName()}Message.pressAction(Minecraft.getInstance().player, 0, 0);
 							</#if>
 
@@ -70,7 +70,7 @@ package ${package}.init;
 						<#if hasProcedure(keybind.onKeyReleased)>
 						else if (isDownOld != isDown && !isDown) {
 							int dt = (int) (System.currentTimeMillis() - ${keybind.getModElement().getRegistryNameUpper()}_LASTPRESS);
-							${JavaModName}.sendToServer(new ${keybind.getModElement().getName()}Message(1, dt));
+							${package}.${JavaModName}.sendToServer(new ${keybind.getModElement().getName()}Message(1, dt));
 							${keybind.getModElement().getName()}Message.pressAction(Minecraft.getInstance().player, 1, dt);
 						}
 						</#if>
@@ -94,7 +94,7 @@ package ${package}.init;
 		</#list>
 	}
 
-	@Mod.EventBusSubscriber(modid = ${JavaModName}.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT) public static class KeyEventListener {
+	@Mod.EventBusSubscriber(modid = ${package}.${JavaModName}.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT) public static class KeyEventListener {
 
 		@SubscribeEvent public static void onClientTick(TickEvent.ClientTickEvent event) {
 			if (event.phase != TickEvent.Phase.END) return;

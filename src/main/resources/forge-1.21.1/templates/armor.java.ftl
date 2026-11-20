@@ -44,7 +44,7 @@ import java.util.function.Consumer;
 import net.minecraft.client.model.Model;
 
 <@javacompress>
-@Mod.EventBusSubscriber(modid = ${JavaModName}.MODID, bus = Mod.EventBusSubscriber.Bus.MOD) public abstract class ${name}Item extends ArmorItem {
+@Mod.EventBusSubscriber(modid = ${package}.${JavaModName}.MODID, bus = Mod.EventBusSubscriber.Bus.MOD) public abstract class ${name}Item extends ArmorItem {
 	static { MinecraftForge.EVENT_BUS.register(${name}Item.class); }
 
 	private static final ArmorMaterial ARMOR_MATERIAL_VALUE = new ArmorMaterial(
@@ -97,7 +97,7 @@ import net.minecraft.client.model.Model;
 						public void renderToBuffer(PoseStack poseStack, VertexConsumer buffer, int packedLight, int packedOverlay, int color) {
 							VertexConsumer translucentTexture = Minecraft.getInstance().renderBuffers().bufferSource().getBuffer(RenderType.entityTranslucent(
 								<#if data.helmetModelTexture?has_content && data.helmetModelTexture != "From armor">
-									${JavaModName}Items.${REGISTRYNAME}_HELMET.get().getArmorTexture(null, null, null, null, false)
+									${package}.init.${JavaModName}Items.${REGISTRYNAME}_HELMET.get().getArmorTexture(null, null, null, null, false)
 								<#else>
 									ResourceLocation.parse("${modid}:textures/models/armor/${data.armorTextureFile}_layer_1.png")
 								</#if>
@@ -106,7 +106,7 @@ import net.minecraft.client.model.Model;
 						}
 					}
 					</#if>;
-					armorModel.head.setPos(0, 0, 0);
+					armorModel.head.setPos(defaultModel.head.x, defaultModel.head.y, defaultModel.head.z);
 				}
 				armorModel.crouching = living.isShiftKeyDown();
 				armorModel.riding = defaultModel.riding;
@@ -139,7 +139,7 @@ import net.minecraft.client.model.Model;
 						public void renderToBuffer(PoseStack poseStack, VertexConsumer buffer, int packedLight, int packedOverlay, int color) {
 							VertexConsumer translucentTexture = Minecraft.getInstance().renderBuffers().bufferSource().getBuffer(RenderType.entityTranslucent(
 								<#if data.bodyModelTexture?has_content && data.bodyModelTexture != "From armor">
-									${JavaModName}Items.${REGISTRYNAME}_CHESTPLATE.get().getArmorTexture(null, null, null, null, false)
+									${package}.init.${JavaModName}Items.${REGISTRYNAME}_CHESTPLATE.get().getArmorTexture(null, null, null, null, false)
 								<#else>
 									ResourceLocation.parse("${modid}:textures/models/armor/${data.armorTextureFile}_layer_1.png")
 								</#if>
@@ -148,6 +148,9 @@ import net.minecraft.client.model.Model;
 						}
 					}
 					</#if>;
+					armorModel.body.setPos(defaultModel.body.x, defaultModel.body.y, defaultModel.body.z);
+					armorModel.rightArm.setPos(defaultModel.rightArm.x, defaultModel.rightArm.y, defaultModel.rightArm.z);
+					armorModel.leftArm.setPos(defaultModel.leftArm.x, defaultModel.leftArm.y, defaultModel.leftArm.z);
 				}
 				armorModel.crouching = living.isShiftKeyDown();
 				armorModel.riding = defaultModel.riding;
@@ -180,7 +183,7 @@ import net.minecraft.client.model.Model;
 						public void renderToBuffer(PoseStack poseStack, VertexConsumer buffer, int packedLight, int packedOverlay, int color) {
 							VertexConsumer translucentTexture = Minecraft.getInstance().renderBuffers().bufferSource().getBuffer(RenderType.entityTranslucent(
 								<#if data.leggingsModelTexture?has_content && data.leggingsModelTexture != "From armor">
-									${JavaModName}Items.${REGISTRYNAME}_LEGGINGS.get().getArmorTexture(null, null, null, null, false)
+									${package}.init.${JavaModName}Items.${REGISTRYNAME}_LEGGINGS.get().getArmorTexture(null, null, null, null, false)
 								<#else>
 									ResourceLocation.parse("${modid}:textures/models/armor/${data.armorTextureFile}_layer_2.png")
 								</#if>
@@ -189,6 +192,8 @@ import net.minecraft.client.model.Model;
 						}
 					}
 					</#if>;
+					armorModel.leftLeg.setPos(defaultModel.leftLeg.x, defaultModel.leftLeg.y, defaultModel.leftLeg.z);
+					armorModel.rightLeg.setPos(defaultModel.rightLeg.x, defaultModel.rightLeg.y, defaultModel.rightLeg.z);
 				}
 				armorModel.crouching = living.isShiftKeyDown();
 				armorModel.riding = defaultModel.riding;
@@ -221,7 +226,7 @@ import net.minecraft.client.model.Model;
 						public void renderToBuffer(PoseStack poseStack, VertexConsumer buffer, int packedLight, int packedOverlay, int color) {
 							VertexConsumer translucentTexture = Minecraft.getInstance().renderBuffers().bufferSource().getBuffer(RenderType.entityTranslucent(
 								<#if data.bootsModelTexture?has_content && data.bootsModelTexture != "From armor">
-									${JavaModName}Items.${REGISTRYNAME}_BOOTS.get().getArmorTexture(null, null, null, null, false)
+									${package}.init.${JavaModName}Items.${REGISTRYNAME}_BOOTS.get().getArmorTexture(null, null, null, null, false)
 								<#else>
 									ResourceLocation.parse("${modid}:textures/models/armor/${data.armorTextureFile}_layer_1.png")
 								</#if>
@@ -230,6 +235,8 @@ import net.minecraft.client.model.Model;
 						}
 					}
 					</#if>;
+					armorModel.leftLeg.setPos(defaultModel.leftLeg.x, defaultModel.leftLeg.y, defaultModel.leftLeg.z);
+					armorModel.rightLeg.setPos(defaultModel.rightLeg.x, defaultModel.rightLeg.y, defaultModel.rightLeg.z);
 				}
 				armorModel.crouching = living.isShiftKeyDown();
 				armorModel.riding = defaultModel.riding;
@@ -380,10 +387,11 @@ new Item.Properties()
 	<#-- Then add the custom modifiers -->
 	<#list modifiers as modifier>
 	.add(<#if modifier.attribute?starts_with("Attributes.")>${modifier.attribute}<#else>${modifier.attribute}.getHolder().orElseThrow()</#if>, new AttributeModifier(
-			ResourceLocation.fromNamespaceAndPath(${JavaModName}.MODID, "${registryname}_${modifier?index}.${armorPart}"),
+			ResourceLocation.fromNamespaceAndPath(${package}.${JavaModName}.MODID, "${registryname}_${modifier?index}.${armorPart}"),
 			${modifier.amount}, AttributeModifier.Operation.${modifier.operation}),
 			<#if modifier.equipmentSlot.getUnmappedValue() == "default">${defaultEquipSlot}<#else>${modifier.equipmentSlot}</#if>)
 	</#list>.build()
 )
 </#if>
 </#macro>
+

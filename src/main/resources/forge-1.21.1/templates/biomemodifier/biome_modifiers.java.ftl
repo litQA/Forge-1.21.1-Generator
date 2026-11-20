@@ -26,7 +26,7 @@ import ${package}.${JavaModName};
 public final class ${JavaModName}BiomeModifiers {
 
 	public static final DeferredRegister<MapCodec<? extends BiomeModifier>> REGISTRY = DeferredRegister
-			.create(ForgeRegistries.BIOME_MODIFIER_SERIALIZERS.getKey(), ${JavaModName}.MODID);
+			.create(ForgeRegistries.BIOME_MODIFIER_SERIALIZERS.getKey(), ${package}.${JavaModName}.MODID);
 
 	public static final RegistryObject<MapCodec<? extends BiomeModifier>> ANY_FEATURES = REGISTRY
 			.register("any_features", () -> AnyFeatures.CODEC);
@@ -69,3 +69,4 @@ public final class ${JavaModName}BiomeModifiers {
 		}
 	}
 }
+

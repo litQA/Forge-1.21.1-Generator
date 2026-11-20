@@ -37,7 +37,7 @@ import net.minecraftforge.client.event.RenderGuiEvent;
 
 <#assign hasEntityModels = false>
 
-@Mod.EventBusSubscriber(modid = ${JavaModName}.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT) public class ${name}Overlay {
+@Mod.EventBusSubscriber(modid = ${package}.${JavaModName}.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT) public class ${name}Overlay {
 	<#if data.baseTexture?has_content>
 		private static final ResourceLocation BACKGROUND = ResourceLocation.parse("${modid}:textures/screens/${data.baseTexture}");
 	</#if>

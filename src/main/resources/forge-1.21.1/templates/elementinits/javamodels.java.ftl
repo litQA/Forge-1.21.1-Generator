@@ -36,7 +36,7 @@
 
 package ${package}.init;
 
-@Mod.EventBusSubscriber(modid = ${JavaModName}.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT) public class ${JavaModName}Models {
+@Mod.EventBusSubscriber(modid = ${package}.${JavaModName}.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT) public class ${JavaModName}Models {
 	static { MinecraftForge.EVENT_BUS.register(${JavaModName}Models.class); }
 
 	@SubscribeEvent public static void registerLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event) {

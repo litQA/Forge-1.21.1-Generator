@@ -62,9 +62,9 @@ import net.minecraftforge.registries.RegistryObject;
 <#assign has_chunks = chunks?size gt 1>
 
 public class ${JavaModName}Items {
-	static { MinecraftForge.EVENT_BUS.register(${JavaModName}Items.class); }
+	static { MinecraftForge.EVENT_BUS.register(${package}.init.${JavaModName}Items.class); }
 
-	public static final DeferredRegister<Item> REGISTRY = DeferredRegister.create(ForgeRegistries.ITEMS, ${JavaModName}.MODID);
+	public static final DeferredRegister<Item> REGISTRY = DeferredRegister.create(ForgeRegistries.ITEMS, ${package}.${JavaModName}.MODID);
 
 	<@javacompress>
 	<#list items as item>
@@ -123,22 +123,22 @@ public class ${JavaModName}Items {
 				<#if item.isDoubleBlock()>
 					<#assign hasDoubleBlocks = true>
 					${item.getModElement().getRegistryNameUpper()} =
-					doubleBlock(${JavaModName}Blocks.${item.getModElement().getRegistryNameUpper()}
+					doubleBlock(${package}.init.${JavaModName}Blocks.${item.getModElement().getRegistryNameUpper()}
 					<#if item.hasCustomItemProperties()>, <@blockItemProperties item/></#if>);
 				<#elseif (item.getModElement().getTypeString() == "block") && (item.blockBase! == "Sign")>
 					<#assign hasSigns = true>
 					${item.getModElement().getRegistryNameUpper()} =
-					signBlock(${JavaModName}Blocks.${item.getModElement().getRegistryNameUpper()}, ${JavaModName}Blocks.${item.getWallRegistryNameUpper()}
+					signBlock(${package}.init.${JavaModName}Blocks.${item.getModElement().getRegistryNameUpper()}, ${package}.init.${JavaModName}Blocks.${item.getWallRegistryNameUpper()}
 					<#if item.hasCustomItemProperties()>, <@blockItemProperties item/></#if>);
 				<#elseif (item.getModElement().getTypeString() == "block") && (item.blockBase! == "HangingSign")>
 					<#assign hasHangingSigns = true>
 					${item.getModElement().getRegistryNameUpper()} =
-					hangingSignBlock(${JavaModName}Blocks.${item.getModElement().getRegistryNameUpper()}, ${JavaModName}Blocks.${item.getWallRegistryNameUpper()}
+					hangingSignBlock(${package}.init.${JavaModName}Blocks.${item.getModElement().getRegistryNameUpper()}, ${package}.init.${JavaModName}Blocks.${item.getWallRegistryNameUpper()}
 					<#if item.hasCustomItemProperties()>, <@blockItemProperties item/></#if>);
 				<#else>
 					<#assign hasBlocks = true>
 					${item.getModElement().getRegistryNameUpper()} =
-					block(${JavaModName}Blocks.${item.getModElement().getRegistryNameUpper()}
+					block(${package}.init.${JavaModName}Blocks.${item.getModElement().getRegistryNameUpper()}
 					<#if item.hasCustomItemProperties()>, <@blockItemProperties item/></#if>);
 				</#if>
 			<#else>
@@ -199,7 +199,7 @@ public class ${JavaModName}Items {
 	</#if>
 
 	<#if hasItemsWithProperties>
-	@Mod.EventBusSubscriber(modid = ${JavaModName}.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT) public static class ItemsClientSideHandler {
+	@Mod.EventBusSubscriber(modid = ${package}.${JavaModName}.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT) public static class ItemsClientSideHandler {
 	static { MinecraftForge.EVENT_BUS.register(ItemsClientSideHandler.class); }
 		@SubscribeEvent @OnlyIn(Dist.CLIENT) public static void clientLoad(FMLClientSetupEvent event) {
 			event.enqueueWork(() -> {

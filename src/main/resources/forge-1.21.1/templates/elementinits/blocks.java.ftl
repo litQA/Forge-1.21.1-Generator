@@ -75,10 +75,10 @@ import net.minecraftforge.registries.RegistryObject;
 <#assign chunks = blocks?chunk(2500)>
 <#assign has_chunks = chunks?size gt 1>
 
-<#if signs?size != 0>@Mod.EventBusSubscriber(modid = ${JavaModName}.MODID, bus = Mod.EventBusSubscriber.Bus.MOD) </#if>public class ${JavaModName}Blocks {
-	static { MinecraftForge.EVENT_BUS.register(${JavaModName}Blocks.class); }
+<#if signs?size != 0>@Mod.EventBusSubscriber(modid = ${package}.${JavaModName}.MODID, bus = Mod.EventBusSubscriber.Bus.MOD) </#if>public class ${JavaModName}Blocks {
+	static { MinecraftForge.EVENT_BUS.register(${package}.init.${JavaModName}Blocks.class); }
 
-	public static final DeferredRegister<Block> REGISTRY = DeferredRegister.create(ForgeRegistries.BLOCKS, ${JavaModName}.MODID);
+	public static final DeferredRegister<Block> REGISTRY = DeferredRegister.create(ForgeRegistries.BLOCKS, ${package}.${JavaModName}.MODID);
 
 	<@javacompress>
 	<#list blocks as block>
@@ -121,7 +121,7 @@ import net.minecraftforge.registries.RegistryObject;
 	// End of user code block custom blocks
 
 	<#if hasTintedBlocks || hasTintedBlockItems || (signs?size != 0)>
-	@Mod.EventBusSubscriber(modid = ${JavaModName}.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT) public static class BlocksClientSideHandler {
+	@Mod.EventBusSubscriber(modid = ${package}.${JavaModName}.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT) public static class BlocksClientSideHandler {
 	static { MinecraftForge.EVENT_BUS.register(BlocksClientSideHandler.class); }
 		<#if hasTintedBlocks>
 		@SubscribeEvent public static void blockColorLoad(RegisterColorHandlersEvent.Block event) {
