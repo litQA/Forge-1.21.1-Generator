@@ -106,6 +106,7 @@ import net.minecraft.client.model.Model;
 						}
 					}
 					</#if>;
+					armorModel.head.setPos(0, 0, 0);
 				}
 				armorModel.crouching = living.isShiftKeyDown();
 				armorModel.riding = defaultModel.riding;
