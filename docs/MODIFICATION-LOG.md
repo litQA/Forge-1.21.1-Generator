@@ -18,3 +18,4 @@ Build numbers are cumulative modification counts. The current value is stored in
 | 34 | Added local block/blockentity imports for mod, init, and inventory classes and qualified GUI slider payload types so converted GUI workspaces compile. |
 | 35 | Fully qualified generated GUI/menu, block-entity, logger, and bound-menu references so import formatting cannot strip required local symbols. |
 | 36 | Fully qualified generated screen, init, item, block, effect, and mod-root references across GUI/block templates to make regenerated large workspaces import-format independent. |
+| 37 | Fixed GUI slider feedback by suppressing network sends while applying menu-state updates, and removed the workspacebase prebuilt Gradle cache so workspace setup precedes Java model/compile work. |

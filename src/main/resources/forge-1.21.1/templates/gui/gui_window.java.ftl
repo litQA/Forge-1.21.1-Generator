@@ -343,12 +343,13 @@ public class ${name}Screen extends AbstractContainerScreen<${name}Menu> implemen
 				"gui.${modid}.${registryname}.${component.getName()}_prefix"), Component.translatable("gui.${modid}.${registryname}.${component.getName()}_suffix"),
 				${component.min}, ${component.max}, ${component.value}, ${component.step}, 0, true) {
 					@Override protected void applyValue() {
-						if (!menuStateUpdateActive)
+						if (!menuStateUpdateActive) {
 							menu.sendMenuStateUpdate(entity, 2, "${component.getName()}", this.getValue(), false);
-						<#if hasProcedure(component.whenSliderMoves)>
-							${package}.${JavaModName}.sendToServer(new ${name}SliderMessage(${slid}, x, y, z, this.getValue()));
-							${name}SliderMessage.handleSliderAction(entity, ${slid}, x, y, z, this.getValue());
-						</#if>
+							<#if hasProcedure(component.whenSliderMoves)>
+								${package}.${JavaModName}.sendToServer(new ${name}SliderMessage(${slid}, x, y, z, this.getValue()));
+								${name}SliderMessage.handleSliderAction(entity, ${slid}, x, y, z, this.getValue());
+							</#if>
+						}
 					}
 				};
 			this.addRenderableWidget(${component.getName()});
