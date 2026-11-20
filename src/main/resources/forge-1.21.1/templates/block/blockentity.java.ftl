@@ -33,6 +33,10 @@
 
 package ${package}.block.entity;
 
+import ${package}.${JavaModName};
+import ${package}.init.*;
+import ${package}.world.inventory.*;
+
 import com.google.common.collect.ImmutableMap;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;

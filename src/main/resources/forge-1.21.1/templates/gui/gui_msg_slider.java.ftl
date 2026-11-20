@@ -33,10 +33,10 @@
 
 package ${package}.network;
 
-@Mod.EventBusSubscriber(modid = ${JavaModName}.MODID, bus = Mod.EventBusSubscriber.Bus.MOD) public record ${name}SliderMessage(int sliderID, int x, int y, int z, double value) implements CustomPacketPayload {
+@Mod.EventBusSubscriber(modid = ${JavaModName}.MODID, bus = Mod.EventBusSubscriber.Bus.MOD) public record ${name}SliderMessage(int sliderID, int x, int y, int z, double value) implements ${package}.network.CustomPacketPayload {
 	static { MinecraftForge.EVENT_BUS.register(${name}SliderMessage.class); }
 
-	public static final Type<${name}SliderMessage> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(${JavaModName}.MODID, "${registryname}_sliders"));
+	public static final ${package}.network.CustomPacketPayload.Type<${name}SliderMessage> TYPE = new ${package}.network.CustomPacketPayload.Type<>(ResourceLocation.fromNamespaceAndPath(${JavaModName}.MODID, "${registryname}_sliders"));
 
 	public static final StreamCodec<RegistryFriendlyByteBuf, ${name}SliderMessage> STREAM_CODEC = StreamCodec.of(
 			(RegistryFriendlyByteBuf buffer, ${name}SliderMessage message) -> {
@@ -49,7 +49,7 @@ package ${package}.network;
 			(RegistryFriendlyByteBuf buffer) -> new ${name}SliderMessage(buffer.readInt(), buffer.readInt(), buffer.readInt(), buffer.readInt(), buffer.readDouble())
 	);
 
-	@Override public Type<${name}SliderMessage> type() {
+	@Override public ${package}.network.CustomPacketPayload.Type<${name}SliderMessage> type() {
 		return TYPE;
 	}
 

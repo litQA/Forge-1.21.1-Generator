@@ -15,3 +15,4 @@ Build numbers are cumulative modification counts. The current value is stored in
 | 31 | Fixed custom potion-effect holder conversions, fully qualified generated procedure calls, and expanded block, block-entity, plant, init, and brewing imports for converted workspaces; embedded a Forge 52.1.21 import cache in the workspace base. |
 | 32 | Fixed generated armor client initialization to use the armor slot instead of registry-object identity during item construction, and materialized the custom armor material holder before item registration. |
 | 33 | Rebased custom armor-model parts onto the humanoid head origin so Java armor models render at the helmet position instead of the entity feet. |
+| 34 | Added local block/blockentity imports for mod, init, and inventory classes and qualified GUI slider payload types so converted GUI workspaces compile. |
